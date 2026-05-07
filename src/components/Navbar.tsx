@@ -15,7 +15,7 @@ export default function Navbar({ currentPage, setCurrentPage, onNavigateToServic
   const [isScrolled, setIsScrolled] = useState(false);
   const isServicesPage = ['services', 'consulting-services', 'staffing-solutions', 'technology-services'].includes(currentPage);
 
-  // Handle scroll detection for sticky glassmorphism look
+  // Handle scroll detection for sticky glassmorphism look + close mobile menu on scroll
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 20) {
@@ -23,10 +23,11 @@ export default function Navbar({ currentPage, setCurrentPage, onNavigateToServic
       } else {
         setIsScrolled(false);
       }
+      if (isOpen) setIsOpen(false);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isOpen]);
 
   useEffect(() => {
     setIsScrolled(false);
@@ -68,220 +69,217 @@ export default function Navbar({ currentPage, setCurrentPage, onNavigateToServic
     setIsOpen(false);
   };
 
+  // Drawer top offset matches nav height: py-3 (scrolled ~64px) vs py-5 (not scrolled ~80px)
+  const drawerTop = isScrolled ? 'top-[64px]' : 'top-[80px]';
+
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled 
-        ? 'bg-white/90 backdrop-blur-md shadow-md border-b border-gray-100/50 py-3' 
-        : 'bg-transparent py-5'
-    }`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center">
-          
-          {/* Logo / Branding */}
-          <div 
-            onClick={() => setCurrentPage('home')}
-            className="flex items-center space-x-3 cursor-pointer group"
-          >
-            <div className="h-10 w-15 rounded-xl  from-[#5EE3B7] to-[#00BFEF] p-[2px] transition-transform duration-300 group-hover:scale-105">
-              {/* <div> */}
-              <img src={logo} alt="IVA Work Solutions Logo" className=" object-contain" />
-            {/* </div> */}
-            </div>
-            {/* <div>
-              <span className="text-xl font-extrabold text-slate-900 tracking-tight block">
-                 <span className="bg-gradient-to-r from-[#5EE3B7] to-[#00BFEF] bg-clip-text text-transparent">Work Solutions</span>
-              </span>
-              <span className="text-[10px] tracking-widest text-slate-500 uppercase font-bold block -mt-1">Consulting & Tech</span>
-            </div> */}
-          </div>
+    <>
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? 'bg-white/90 backdrop-blur-md shadow-md border-b border-gray-100/50 py-3'
+          : 'bg-transparent py-5'
+      }`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center">
 
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-1">
-            <button 
+            {/* Logo / Branding */}
+            <div
               onClick={() => setCurrentPage('home')}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                currentPage === 'home' ? 'text-[#00BFEF] bg-slate-50 font-semibold' : 'text-slate-600 hover:text-slate-900'
-              }`}
+              className="flex items-center space-x-3 cursor-pointer group"
             >
-              Home
-            </button>
-            
-            <button 
-              onClick={() => setCurrentPage('about')}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                currentPage === 'about' ? 'text-[#00BFEF] bg-slate-50 font-semibold' : 'text-slate-600 hover:text-slate-900'
-              }`}
-            >
-              About Us
-            </button>
-
-            {/* Premium Mega-Menu / Services Dropdown */}
-            <div className="relative group">
-              <button 
-                onClick={() => setCurrentPage('services')}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all flex items-center space-x-1 ${
-                  isServicesPage ? 'text-[#00BFEF] bg-slate-50 font-semibold' : 'text-slate-600 hover:text-slate-900'
-                }`}
-              >
-                <span>Services</span>
-                <ChevronDown className="h-4 w-4 transition-transform duration-300 group-hover:rotate-180" />
-              </button>
-
-              {/* Mega-menu dropdown */}
-              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-[820px] bg-white rounded-2xl shadow-2xl border border-gray-100 p-6 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300 grid grid-cols-3 gap-6">
-                
-                {/* Consulting Services column */}
-                <div className="space-y-4">
-                  <button
-                    onClick={() => onNavigateToServiceCategory('consulting')}
-                    className="flex items-center space-x-2 border-b border-gray-100 pb-2 w-full text-left group/title"
-                  >
-                    <div className="h-8 w-8 rounded-lg bg-teal-50 flex items-center justify-center">
-                      <Layers className="h-4 w-4 text-[#5EE3B7]" />
-                    </div>
-                    <span className="text-sm font-bold text-slate-800 uppercase tracking-wider group-hover/title:text-[#5EE3B7] transition-colors">Consulting</span>
-                  </button>
-                  <ul className="space-y-2">
-                    {dropdownMenu.consulting.items.map((item) => (
-                      <li key={item.id}>
-                        <button
-                          onClick={() => handleSubServiceClick('consulting', item.id)}
-                          className="w-full text-left text-sm text-slate-600 hover:text-[#5EE3B7] hover:pl-2 transition-all duration-200 flex items-center justify-between group/sub"
-                        >
-                          <span>{item.label}</span>
-                          <ChevronRight className="h-3 w-3 opacity-0 group-hover/sub:opacity-100 transition-opacity" />
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Staffing Solutions column */}
-                <div className="space-y-4">
-                  <button
-                    onClick={() => onNavigateToServiceCategory('staffing')}
-                    className="flex items-center space-x-2 border-b border-gray-100 pb-2 w-full text-left group/title"
-                  >
-                    <div className="h-8 w-8 rounded-lg bg-blue-50 flex items-center justify-center">
-                      <Briefcase className="h-4 w-4 text-[#00BFEF]" />
-                    </div>
-                    <span className="text-sm font-bold text-slate-800 uppercase tracking-wider group-hover/title:text-[#00BFEF] transition-colors">Staffing</span>
-                  </button>
-                  <ul className="space-y-2">
-                    {dropdownMenu.staffing.items.map((item) => (
-                      <li key={item.id}>
-                        <button
-                          onClick={() => handleSubServiceClick('staffing', item.id)}
-                          className="w-full text-left text-sm text-slate-600 hover:text-[#00BFEF] hover:pl-2 transition-all duration-200 flex items-center justify-between group/sub"
-                        >
-                          <span>{item.label}</span>
-                          <ChevronRight className="h-3 w-3 opacity-0 group-hover/sub:opacity-100 transition-opacity" />
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Technology Services column */}
-                <div className="space-y-4">
-                  <button
-                    onClick={() => onNavigateToServiceCategory('technology')}
-                    className="flex items-center space-x-2 border-b border-gray-100 pb-2 w-full text-left group/title"
-                  >
-                    <div className="h-8 w-8 rounded-lg bg-[#5EE3B7]/10 flex items-center justify-center">
-                      <Cpu className="h-4 w-4 text-[#5EE3B7]" />
-                    </div>
-                    <span className="text-sm font-bold text-slate-800 uppercase tracking-wider group-hover/title:text-[#00BFEF] transition-colors">Technology</span>
-                  </button>
-                  <ul className="space-y-2">
-                    {dropdownMenu.technology.items.map((item) => (
-                      <li key={item.id}>
-                        <button
-                          onClick={() => handleSubServiceClick('technology', item.id)}
-                          className="w-full text-left text-sm text-slate-600 hover:text-[#00BFEF] hover:pl-2 transition-all duration-200 flex items-center justify-between group/sub"
-                        >
-                          <span>{item.label}</span>
-                          <ChevronRight className="h-3 w-3 opacity-0 group-hover/sub:opacity-100 transition-opacity" />
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
+              <div className="h-10 w-15 rounded-xl from-[#5EE3B7] to-[#00BFEF] p-[2px] transition-transform duration-300 group-hover:scale-105">
+                <img src={logo} alt="IVA Work Solutions Logo" className="object-contain" />
               </div>
             </div>
 
-            <button 
-              onClick={() => setCurrentPage('careers')}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                currentPage === 'careers' ? 'text-[#00BFEF] bg-slate-50 font-semibold' : 'text-slate-600 hover:text-slate-900'
-              }`}
-            >
-              Careers
-            </button>
-
-            <button 
-              onClick={() => setCurrentPage('blog')}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                currentPage === 'blog' ? 'text-[#00BFEF] bg-slate-50 font-semibold' : 'text-slate-600 hover:text-slate-900'
-              }`}
-            >
-              Blog
-            </button>
-
-            <button 
-              onClick={() => setCurrentPage('contact')}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                currentPage === 'contact' ? 'text-[#00BFEF] bg-slate-50 font-semibold' : 'text-slate-600 hover:text-slate-900'
-              }`}
-            >
-              Contact Us
-            </button>
-
-            {/* CTAs */}
-            <div className="ml-4 pl-4 border-l border-gray-200 flex items-center space-x-3">
+            {/* Desktop Navigation */}
+            <div className="hidden lg:flex items-center space-x-1">
               <button
-                onClick={() => setCurrentPage('admin')}
-                className={`text-xs font-bold px-3 py-1.5 rounded-full transition-all flex items-center space-x-1 border ${
-                  currentPage === 'admin'
-                    ? 'border-[#00BFEF]/50 bg-[#00BFEF]/10 text-[#00BFEF]'
-                    : 'border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50'
+                onClick={() => setCurrentPage('home')}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                  currentPage === 'home' ? 'text-[#00BFEF] bg-slate-50 font-semibold' : 'text-slate-600 hover:text-slate-900'
                 }`}
-                title="Admin Panel"
               >
-                <span>Admin</span>
+                Home
               </button>
-              <button 
-                onClick={() => setCurrentPage('contact')}
-                className="bg-gradient-to-r from-[#5EE3B7] to-[#00BFEF] hover:from-[#4dd1a4] hover:to-[#00abd4] text-white font-bold px-4 py-2 rounded-xl text-sm transition-all duration-300 shadow-md hover:shadow-lg hover:scale-[1.02]"
+
+              <button
+                onClick={() => setCurrentPage('about')}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                  currentPage === 'about' ? 'text-[#00BFEF] bg-slate-50 font-semibold' : 'text-slate-600 hover:text-slate-900'
+                }`}
               >
-                Inquire Now
+                About Us
+              </button>
+
+              {/* Premium Mega-Menu / Services Dropdown */}
+              <div className="relative group">
+                <button
+                  onClick={() => setCurrentPage('services')}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-all flex items-center space-x-1 ${
+                    isServicesPage ? 'text-[#00BFEF] bg-slate-50 font-semibold' : 'text-slate-600 hover:text-slate-900'
+                  }`}
+                >
+                  <span>Services</span>
+                  <ChevronDown className="h-4 w-4 transition-transform duration-300 group-hover:rotate-180" />
+                </button>
+
+                {/* Mega-menu dropdown */}
+                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-[820px] bg-white rounded-2xl shadow-2xl border border-gray-100 p-6 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300 grid grid-cols-3 gap-6">
+
+                  {/* Consulting Services column */}
+                  <div className="space-y-4">
+                    <button
+                      onClick={() => onNavigateToServiceCategory('consulting')}
+                      className="flex items-center space-x-2 border-b border-gray-100 pb-2 w-full text-left group/title"
+                    >
+                      <div className="h-8 w-8 rounded-lg bg-teal-50 flex items-center justify-center">
+                        <Layers className="h-4 w-4 text-[#5EE3B7]" />
+                      </div>
+                      <span className="text-sm font-bold text-slate-800 uppercase tracking-wider group-hover/title:text-[#5EE3B7] transition-colors">Consulting</span>
+                    </button>
+                    <ul className="space-y-2">
+                      {dropdownMenu.consulting.items.map((item) => (
+                        <li key={item.id}>
+                          <button
+                            onClick={() => handleSubServiceClick('consulting', item.id)}
+                            className="w-full text-left text-sm text-slate-600 hover:text-[#5EE3B7] hover:pl-2 transition-all duration-200 flex items-center justify-between group/sub"
+                          >
+                            <span>{item.label}</span>
+                            <ChevronRight className="h-3 w-3 opacity-0 group-hover/sub:opacity-100 transition-opacity" />
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Staffing Solutions column */}
+                  <div className="space-y-4">
+                    <button
+                      onClick={() => onNavigateToServiceCategory('staffing')}
+                      className="flex items-center space-x-2 border-b border-gray-100 pb-2 w-full text-left group/title"
+                    >
+                      <div className="h-8 w-8 rounded-lg bg-blue-50 flex items-center justify-center">
+                        <Briefcase className="h-4 w-4 text-[#00BFEF]" />
+                      </div>
+                      <span className="text-sm font-bold text-slate-800 uppercase tracking-wider group-hover/title:text-[#00BFEF] transition-colors">Staffing</span>
+                    </button>
+                    <ul className="space-y-2">
+                      {dropdownMenu.staffing.items.map((item) => (
+                        <li key={item.id}>
+                          <button
+                            onClick={() => handleSubServiceClick('staffing', item.id)}
+                            className="w-full text-left text-sm text-slate-600 hover:text-[#00BFEF] hover:pl-2 transition-all duration-200 flex items-center justify-between group/sub"
+                          >
+                            <span>{item.label}</span>
+                            <ChevronRight className="h-3 w-3 opacity-0 group-hover/sub:opacity-100 transition-opacity" />
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Technology Services column */}
+                  <div className="space-y-4">
+                    <button
+                      onClick={() => onNavigateToServiceCategory('technology')}
+                      className="flex items-center space-x-2 border-b border-gray-100 pb-2 w-full text-left group/title"
+                    >
+                      <div className="h-8 w-8 rounded-lg bg-[#5EE3B7]/10 flex items-center justify-center">
+                        <Cpu className="h-4 w-4 text-[#5EE3B7]" />
+                      </div>
+                      <span className="text-sm font-bold text-slate-800 uppercase tracking-wider group-hover/title:text-[#00BFEF] transition-colors">Technology</span>
+                    </button>
+                    <ul className="space-y-2">
+                      {dropdownMenu.technology.items.map((item) => (
+                        <li key={item.id}>
+                          <button
+                            onClick={() => handleSubServiceClick('technology', item.id)}
+                            className="w-full text-left text-sm text-slate-600 hover:text-[#00BFEF] hover:pl-2 transition-all duration-200 flex items-center justify-between group/sub"
+                          >
+                            <span>{item.label}</span>
+                            <ChevronRight className="h-3 w-3 opacity-0 group-hover/sub:opacity-100 transition-opacity" />
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                </div>
+              </div>
+
+              <button
+                onClick={() => setCurrentPage('careers')}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                  currentPage === 'careers' ? 'text-[#00BFEF] bg-slate-50 font-semibold' : 'text-slate-600 hover:text-slate-900'
+                }`}
+              >
+                Careers
+              </button>
+
+              <button
+                onClick={() => setCurrentPage('blog')}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                  currentPage === 'blog' ? 'text-[#00BFEF] bg-slate-50 font-semibold' : 'text-slate-600 hover:text-slate-900'
+                }`}
+              >
+                Blog
+              </button>
+
+              <button
+                onClick={() => setCurrentPage('contact')}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                  currentPage === 'contact' ? 'text-[#00BFEF] bg-slate-50 font-semibold' : 'text-slate-600 hover:text-slate-900'
+                }`}
+              >
+                Contact Us
+              </button>
+
+              {/* CTAs */}
+              <div className="ml-4 pl-4 border-l border-gray-200 flex items-center space-x-3">
+                <button
+                  onClick={() => setCurrentPage('admin')}
+                  className={`text-xs font-bold px-3 py-1.5 rounded-full transition-all flex items-center space-x-1 border ${
+                    currentPage === 'admin'
+                      ? 'border-[#00BFEF]/50 bg-[#00BFEF]/10 text-[#00BFEF]'
+                      : 'border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50'
+                  }`}
+                  title="Admin Panel"
+                >
+                  <span>Admin</span>
+                </button>
+                <button
+                  onClick={() => setCurrentPage('contact')}
+                  className="bg-gradient-to-r from-[#5EE3B7] to-[#00BFEF] hover:from-[#4dd1a4] hover:to-[#00abd4] text-white font-bold px-4 py-2 rounded-xl text-sm transition-all duration-300 shadow-md hover:shadow-lg hover:scale-[1.02]"
+                >
+                  Inquire Now
+                </button>
+              </div>
+            </div>
+
+            {/* Mobile Navigation Toggle */}
+            <div className="flex lg:hidden items-center space-x-3">
+              <a
+                href="tel:+1234567890"
+                className="text-xs font-bold text-slate-800 bg-slate-100 px-3 py-1.5 rounded-full"
+              >
+                Call
+              </a>
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="relative z-50 text-slate-700 hover:text-slate-900 p-2 rounded-xl hover:bg-slate-100 transition-all"
+              >
+                {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
               </button>
             </div>
-          </div>
 
-          {/* Mobile Navigation Toggle */}
-          <div className="flex lg:hidden items-center space-x-3">
-            <a 
-              href="tel:+1234567890" 
-              className="text-xs font-bold text-slate-800 bg-slate-100 px-3 py-1.5 rounded-full"
-            >
-              Call
-            </a>
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-slate-700 hover:text-slate-900 p-2 rounded-xl hover:bg-slate-100 transition-all"
-            >
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </button>
           </div>
-
         </div>
-      </div>
+      </nav>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Drawer — outside <nav> so the nav (z-50) always sits above it, keeping the toggle button clickable */}
       {isOpen && (
-        <div className="lg:hidden fixed inset-0 top-[65px] bg-white z-40 overflow-y-auto px-4 py-6 border-t border-gray-100 flex flex-col justify-between">
+        <div className={`lg:hidden fixed ${drawerTop} left-0 right-0 bottom-0 bg-white z-40 overflow-y-auto px-4 py-6 pb-24 border-t border-gray-100 flex flex-col justify-between`}>
           <div className="space-y-4">
             <button
               onClick={() => { setCurrentPage('home'); setIsOpen(false); }}
@@ -289,7 +287,7 @@ export default function Navbar({ currentPage, setCurrentPage, onNavigateToServic
             >
               Home
             </button>
-            
+
             <button
               onClick={() => { setCurrentPage('about'); setIsOpen(false); }}
               className="w-full text-left px-4 py-3 text-lg font-bold text-slate-800 hover:bg-slate-50 rounded-xl block"
@@ -300,7 +298,7 @@ export default function Navbar({ currentPage, setCurrentPage, onNavigateToServic
             {/* Mobile Services Sections */}
             <div className="border-t border-b border-gray-100 py-3 my-2">
               <span className="px-4 text-xs font-bold text-[#00BFEF] uppercase tracking-wider block mb-2">Services Categories</span>
-              
+
               {/* Consulting Sub-Menu */}
               <div className="mb-4">
                 <span className="px-4 text-sm font-bold text-slate-800 block mb-1">Consulting Services</span>
@@ -348,7 +346,6 @@ export default function Navbar({ currentPage, setCurrentPage, onNavigateToServic
                   ))}
                 </div>
               </div>
-
             </div>
 
             <button
@@ -390,6 +387,6 @@ export default function Navbar({ currentPage, setCurrentPage, onNavigateToServic
           </div>
         </div>
       )}
-    </nav>
+    </>
   );
 }
