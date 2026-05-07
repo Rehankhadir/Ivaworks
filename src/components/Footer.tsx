@@ -1,0 +1,136 @@
+import { Page } from '../types';
+import { Mail, Phone, MapPin, ExternalLink, MessageSquare } from 'lucide-react';
+
+interface FooterProps {
+  setCurrentPage: (page: Page) => void;
+}
+
+export default function Footer({ setCurrentPage }: FooterProps) {
+  const currentYear = new Date().getFullYear();
+
+  return (
+    <footer className="bg-slate-950 text-slate-300 pt-16 pb-8 border-t border-slate-900">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+          
+          {/* Brand Identity */}
+          <div className="space-y-4">
+            <div className="flex items-center space-x-3 cursor-pointer group" onClick={() => setCurrentPage('home')}>
+              <div className="h-10 w-10 rounded-xl bg-gradient-to-tr from-[#5EE3B7] to-[#00BFEF] p-[2px] shadow-md">
+                <div className="h-full w-full bg-slate-900 rounded-[10px] flex items-center justify-center">
+                  <span className="text-white font-extrabold text-lg tracking-wider bg-gradient-to-tr from-[#5EE3B7] to-[#00BFEF] bg-clip-text text-transparent">IVA</span>
+                </div>
+              </div>
+              <div>
+                <span className="text-xl font-extrabold text-white tracking-tight block">
+                  IVA <span className="bg-gradient-to-r from-[#5EE3B7] to-[#00BFEF] bg-clip-text text-transparent">Work Solutions</span>
+                </span>
+                <span className="text-[10px] tracking-widest text-slate-400 uppercase font-bold block -mt-1">Consulting & Tech</span>
+              </div>
+            </div>
+            <p className="text-sm text-slate-400 leading-relaxed">
+              From expert consulting and strategic staffing to innovative technology solutions, IVA Work Solutions delivers everything your business needs under one roof. We simplify challenges, accelerate growth, and provide the right solutions to help you succeed in a fast-changing world.
+            </p>
+            <div className="flex space-x-4 pt-2">
+              {/* WhatsApp Quick Chat */}
+              <a 
+                href="https://wa.me/1234567890" 
+                target="_blank" 
+                rel="noreferrer" 
+                className="h-9 w-9 rounded-lg bg-emerald-950 hover:bg-emerald-900 border border-emerald-500/20 flex items-center justify-center text-[#5EE3B7] transition-colors"
+                title="Chat with us on WhatsApp"
+              >
+                <MessageSquare className="h-4 w-4" />
+              </a>
+            </div>
+          </div>
+
+          {/* Quick Nav Links */}
+          <div>
+            <h3 className="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Quick Navigation</h3>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <button onClick={() => setCurrentPage('home')} className="hover:text-white hover:underline transition-all">Home</button>
+              </li>
+              <li>
+                <button onClick={() => setCurrentPage('about')} className="hover:text-white hover:underline transition-all">About Us</button>
+              </li>
+              <li>
+                <button onClick={() => setCurrentPage('services')} className="hover:text-white hover:underline transition-all">Our Services</button>
+              </li>
+              <li>
+                <button onClick={() => setCurrentPage('careers')} className="hover:text-white hover:underline transition-all">Careers & Jobs</button>
+              </li>
+              <li>
+                <button onClick={() => setCurrentPage('blog')} className="hover:text-white hover:underline transition-all">Insights & Blog</button>
+              </li>
+              <li>
+                <button onClick={() => setCurrentPage('contact')} className="hover:text-white hover:underline transition-all">Contact Us</button>
+              </li>
+            </ul>
+          </div>
+
+          {/* Services Portfolio */}
+          <div>
+            <h3 className="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Our Portfolio</h3>
+            <ul className="space-y-2 text-sm text-slate-400">
+              <li>
+                <button onClick={() => setCurrentPage('services')} className="hover:text-white hover:underline text-left">Consulting Services</button>
+                <span className="text-xs text-slate-500 block">Strategy, Process, Vendor Management</span>
+              </li>
+              <li>
+                <button onClick={() => setCurrentPage('services')} className="hover:text-white hover:underline text-left">Staffing Solutions</button>
+                <span className="text-xs text-slate-500 block">Permanent, Contract, Executive Search</span>
+              </li>
+              <li>
+                <button onClick={() => setCurrentPage('services')} className="hover:text-white hover:underline text-left">Technology Services</button>
+                <span className="text-xs text-slate-500 block">IT Strategy, Development, Cloud, Automation</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* Corporate Office Address */}
+          <div>
+            <h3 className="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Contact Details</h3>
+            <ul className="space-y-4 text-sm text-slate-400">
+              <li className="flex items-start space-x-3">
+                <MapPin className="h-5 w-5 text-[#5EE3B7] shrink-0 mt-0.5" />
+                <span>
+                  IVA Work Solutions Corporate HQ<br />
+                  120 Broadway, Suite 3200<br />
+                  New York, NY 10271
+                </span>
+              </li>
+              <li className="flex items-center space-x-3">
+                <Phone className="h-4 w-4 text-[#00BFEF] shrink-0" />
+                <a href="tel:+1234567890" className="hover:text-white transition-colors">+1 (212) 555-0199</a>
+              </li>
+              <li className="flex items-center space-x-3">
+                <Mail className="h-4 w-4 text-[#5EE3B7] shrink-0" />
+                <a href="mailto:info@ivaworksolutions.com" className="hover:text-white transition-colors">info@ivaworksolutions.com</a>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+        {/* Lower Footer */}
+        <div className="pt-8 border-t border-slate-900 text-xs text-slate-500 flex flex-col sm:flex-row justify-between items-center gap-4">
+          <div>
+            &copy; {currentYear} IVA Work Solutions. All rights reserved. May 2026 Foundation.
+          </div>
+          <div className="flex space-x-6">
+            <a href="#privacy" className="hover:text-slate-400 hover:underline flex items-center space-x-1">
+              <span>Privacy Policy</span>
+              <ExternalLink className="h-3 w-3" />
+            </a>
+            <a href="#terms" className="hover:text-slate-400 hover:underline flex items-center space-x-1">
+              <span>Terms of Service</span>
+              <ExternalLink className="h-3 w-3" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
