@@ -5,6 +5,11 @@ export const SERVICES_DATA: ServiceCategory[] = [
     id: 'consulting',
     title: 'Consulting Services',
     description: 'Helping businesses improve strategy, efficiency, growth, and decision-making.',
+    heroParagraphs: [
+      'IVA Work Solutions works as a reliable vendor and strategic delivery partner, helping organizations streamline hiring, project execution, and operational scalability with confidence.',
+      'Modern businesses need dependable partners who can deliver talent, technology, and operational support efficiently. IVA Work Solutions provides structured vendor partnership models designed to align with enterprise workflows, compliance standards, and delivery expectations.',
+      'We focus on long-term collaboration, seamless communication, and consistent delivery excellence.',
+    ],
     approachTitle: 'Our Strategic Consulting Approach',
     approachSteps: [
       { title: 'Discover', desc: 'Identify core operational bottlenecks, target markets, and immediate opportunities.' },
@@ -16,70 +21,75 @@ export const SERVICES_DATA: ServiceCategory[] = [
     items: [
       {
         id: 'business-strategy',
-        title: 'Business Strategy',
-        description: 'At IVA Work Solutions, our Business Strategy consulting helps organizations create clear direction, strengthen market position, and achieve long-term success. We work with businesses to align goals, identify growth opportunities, improve decision-making, and build practical strategies that deliver measurable results.',
+        title: 'Managed Vendor Support',
+        description: 'End-to-end support for workforce delivery, project coordination, and operational management.',
+        provideLabel: 'Included Services',
         provide: [
-          'Long-term strategy alignment and growth planning',
-          'Market analysis and competitive positioning studies',
-          'Goal setting and execution frameworks (OKRs/KPIs)',
-          'Change management and strategic advisory support'
+          'Resource Coordination',
+          'Hiring Workflow Support',
+          'Delivery Tracking',
+          'Reporting & Communication',
+          'SLA Management'
         ],
+        benefitsLabel: 'Benefits',
         benefits: [
-          'Clear strategic direction and focus',
-          'Accelerated growth and market reach',
-          'Improved executive decision-making',
-          'Higher agility in competitive environments'
+          'Centralized Vendor coordination',
+          'Improved operational visibility ',
+          'Faster issue resolution',
+          'Streamlined workforce management',
+          'Better service governance'
         ]
       },
       {
         id: 'process-improvement',
-        title: 'Process Improvement',
-        description: 'Streamline workflows and eliminate redundancies to lower operational costs and maximize throughput. Our team identifies bottlenecks and re-engineers critical business processes using modern lean principles.',
+        title: 'Offshore Delivery Partnership',
+        description: 'Expand delivery capabilities with cost-effective offshore development and staffing support.',
+        provideLabel: 'Advantages',
         provide: [
-          'Workflow bottleneck analysis and mapping',
-          'Lean operations and process re-engineering',
-          'SOP documentation and standard establishment',
-          'Performance metric tracking and KPIs implementation'
+          'Access to Skilled Offshore Teams ',
+          'Faster Project Execution ',
+          'Reduced Operational Costs ',
+          'Scalable Delivery Capacity',
+          'Extended Delivery Support'
         ],
+        benefitsLabel: 'Ideal For',
         benefits: [
-          'Significant reduction in operational cycle times',
-          'Optimized resource utilization and minimal waste',
-          'Enhanced team collaboration and clarity',
-          'Higher customer satisfaction through consistent delivery'
+          'Global delivery expansion',
+          'Logn-term development projects',
+          'Cost optimization initiatives',
+          'Scalable technology delivery'
         ]
       },
       {
         id: 'vendor-management',
-        title: 'Vendor Management',
-        description: 'Establish high-performing vendor networks, optimize procurement costs, and manage SLAs efficiently. We ensure your partners are aligned with your organizational standards and deliver high-value results.',
+        title: 'White-Label IT Services',
+        description: 'Deliver projects under your brand while we handle backend execution and technical delivery.',
+        provideLabel: 'Services Include',
         provide: [
-          'Vendor selection, evaluation, and background checks',
-          'Contract negotiation and performance standard mapping',
-          'SLA management and regular compliance audits',
-          'Supply chain risk mitigation planning'
+          'Software Development ',
+          'QA & Testing ',
+          'Support Services',
+          'Dedicated Teams ',
+          'Technical Consultation '
         ],
+        benefitsLabel: '',
         benefits: [
-          'Reduced procurement costs and higher budget efficiency',
-          'Minimized risk of partner or supply failure',
-          'Better service levels and adherence to deadlines',
-          'Strong, scalable vendor relationships'
         ]
       },
       {
         id: 'growth-planning',
-        title: 'Growth Planning',
-        description: 'Create actionable roadmaps for sustainable business expansion, geographical reach, and portfolio diversification. Our team combines market insights with practical operational plans to back your growth ideas.',
+        title: 'Project-Based Engagements',
+        description: 'Flexible project execution models designed around your timelines, scope, and business goals.',
+        provideLabel: 'Engagement Models',
         provide: [
-          'New market entry analysis and feasibility studies',
-          'Product or service line diversification strategies',
-          'Financial growth forecasting and resource planning',
-          'Mergers, acquisitions, and strategic partnership support'
+          'Fixed Cost Projects',
+          'Dedicated Team Model', 
+          'Time & Material Model', 
+          'Managed Services', 
         ],
+        benefitsLabel: '',
         benefits: [
-          'Structured expansion with lower financial risk',
-          'Early identification of profitable niche markets',
-          'Scalable operational plans to support increased volume',
-          'Sustainable long-term business value'
+          
         ]
       }
     ]
@@ -87,7 +97,13 @@ export const SERVICES_DATA: ServiceCategory[] = [
   {
     id: 'staffing',
     title: 'Staffing Solutions',
-    description: 'Providing skilled talent for permanent, contract, and remote workforce needs.',
+    description: 'IVA Work Solutions helps businesses hire skilled IT professionals faster, smarter, and more efficiently. From contract staffing to dedicated development teams, we connect organizations with top-tier talent that drives results.',
+    heroParagraphs: [
+      'IVA Work Solutions helps businesses hire skilled IT professionals faster, smarter, and more efficiently. From contract staffing to dedicated development teams, we connect organizations with top-tier talent that drives results.',
+      'Finding the right talent at the right time is critical for business growth. IVA Work Solutions, we specialize in delivering highly skilled IT professionals aligned with your technical, operational, and business goals.',
+      'Whether organizations requires a single specialist, a dedicated offshore team, or large-scale workforce support, Our flexible staffing models are designed to support modern hiring needs.',
+      // 'We combine speed, quality, and industry expertise to help organizations reduce hiring challenges, accelerate delivery timelines, and scale confidently.'
+    ],
     approachTitle: 'Our Talent Acquisition & Staffing Approach',
     approachSteps: [
       { title: 'Understand', desc: 'Learn your hiring goals, company culture, and detailed workforce challenges.' },
@@ -99,88 +115,81 @@ export const SERVICES_DATA: ServiceCategory[] = [
     items: [
       {
         id: 'permanent-hiring',
-        title: 'Permanent Hiring',
-        description: 'Permanent hiring is critical for building stable, productive, and growth-focused organizations. We help businesses identify, attract, and hire professionals who align with both technical requirements and company culture. Our recruitment specialists manage the end-to-end hiring process—from sourcing and screening to interview coordination and onboarding support.',
+        title: 'IT Contract & Permanent Staffing',
+        description: 'IVA Work Solutions provides experienced professionals for both short-term and long-term engagements.',
+        provideLabel: 'Solutions Include',
         provide: [
-          'Talent Sourcing across multiple industries',
-          'Rigorous screening, background verification, and skills assessments',
-          'Cultural fit evaluation and role suitability checks',
-          'Interview coordination and seamless candidate communication',
-          'Offer negotiation and candidate closure support',
-          'Onboarding assistance for a smooth transition'
+          'Software Developers',
+          'Cloud Engineers',
+          'DevOps Specialists',
+          'QA/Test Engineers',
+          'Data Analysts & Data Engineers',
+          'UI/UX Designers',
+          'Project Managers',
+          'Business Analysts'
         ],
+        benefitsLabel: 'Business Benefits',
         benefits: [
-          'Reduced time-to-hire by leveraging pre-vetted talent databases',
-          'Better employee retention and lower turnover rates',
-          'Stronger cultural alignment and productivity',
-          'Minimized hiring risks and streamlined recruitment overhead'
+          'Faster workforce scaling',
+          'Reduce recruitment overhead',
+          'Access to specialized IT expertise',
+          'Improved project delivery timelines',
+          'Flexible engagement models'
         ]
       },
       {
         id: 'contract-staffing',
-        title: 'Contract Staffing',
-        description: 'Contract staffing helps organizations quickly scale teams, manage project workloads, and access specialized skills without long-term commitments. We provide skilled professionals for short-term, long-term, and project-based assignments. This model is ideal for seasonal demand, urgent hiring, technical projects, and workforce flexibility.',
+        title: 'Dedicated Development Teams',
+        description: 'We help businesses build remote or offshore teams fully aligned with your project goals and delivery timelines.',
+        provideLabel: 'Key Advantages',
         provide: [
-          'Short-term talent for immediate coverage or seasonal spikes',
-          'Project-based staffing of developers, analysts, and project managers',
-          'IT and specialized technical staffing under flexible contracts',
-          'Administrative, customer support, and financial staffing solutions',
-          'Contract-to-hire models to evaluate before offering permanent positions',
-          'Comprehensive payroll and compliance management for contractors'
+          'Faster Team Scaling',
+          'Reduced Operational Costs',
+          'Flexible Resource Management',
+          'Continuous Collaboration',
+          'Dedicated Project Ownership',
+          'Scalable Team Expansion'
         ],
+        benefitsLabel: 'Ideal For',
         benefits: [
-          'Rapid hiring turnaround to meet sudden business demands',
-          'Maximum workforce flexibility without overhead increases',
-          'On-demand access to highly niche or specific technical skills',
-          'Reduced fixed staffing costs and optimized operational budget'
+          'Product Development companies',
+          'Startups scaling engineering teams',
+          'Enterprises requiring offshore support',
+          'Long-term technology initiatives'
         ]
       },
       {
         id: 'executive-search',
-        title: 'Executive Search',
-        description: 'Strong leadership transforms organizations. Our Executive Search service focuses on identifying and securing senior-level professionals who bring strategic vision, operational excellence, and leadership capability. We work discreetly and strategically to help businesses hire leaders who create long-term value.',
+        title: 'Recruitment Process Outsourcing (RPO)',
+        description: 'IVA Work Solutions provides Structured recruitment Support to streamlines hiring operations and improve talent acquisition outcomes.',
+        provideLabel: 'Included Services',
         provide: [
-          'C-Level Search (CEO, COO, CFO, CTO, CIO, and Executive leadership)',
-          'Senior Management Recruitment (VPs, Directors, and Heads of Departments)',
-          'Strictly confidential and private leadership search processes',
-          'Market mapping to identify top passive leaders in your industry',
-          'In-depth leadership capability and cultural fit assessment',
-          'Strategic offer negotiation and executive onboarding support'
+          'Candidate Sourcing',
+          'Interview Coordination ',
+          'Talent Pipeline Management ',
+          'Recruitment Reporting ',
+          'Employer Branding Support '
         ],
+        benefitsLabel: 'Benefits',
         benefits: [
-          'Robust leadership pipeline aligned with your growth vision',
-          'More effective strategic execution from day one',
-          'Highly secure, confidential, and professional hiring process',
-          'Direct access to top-tier passive talent not on traditional job boards',
-          'Lasting business transformation and improved organizational culture'
+          'Improved hiring efficiency',
+          'Consistent recruitment process',
+          'Better candidate quality',
+          'Reduced time-to-hire',
+          'Enhanced employer branding'
         ]
       },
-      {
-        id: 'workforce-planning',
-        title: 'Workforce Planning',
-        description: 'Workforce planning helps organizations align talent strategies with business goals. We assist businesses in forecasting workforce needs, optimizing team structures, and preparing for future expansion. This proactive approach ensures the right skills are available when needed.',
-        provide: [
-          'Comprehensive headcount planning based on growth targets',
-          'Skill gap analysis to map current vs. future capability needs',
-          'Organization design, reporting structure, and resource allocation audits',
-          'Succession planning for critical and high-impact leadership roles',
-          'Seasonal resource forecasting and optimization strategies',
-          'Retention and employee engagement planning to prevent talent flight'
-        ],
-        benefits: [
-          'Smarter, data-driven hiring decisions and budget planning',
-          'Improved overall organizational productivity and efficiency',
-          'Lower turnover risk through targeted engagement plans',
-          'A future-proof workforce ready to adapt to industry changes',
-          'Better cost control and alignment between Finance and HR'
-        ]
-      }
     ]
   },
   {
     id: 'technology',
     title: 'Technology Services',
-    description: 'Modern IT solutions including development, automation, cloud, and support.',
+    description: 'IVA Work Solutions delivers modern software engineering and technology solutions that help businesses innovate, optimize operations, and accelerate digital transformation.',
+    heroParagraphs: [
+      'IVA Work Solutions delivers modern software engineering and technology solutions that help businesses innovate, optimize operations, and accelerate digital transformation.',
+      'Technology is at the core of every successful business. We help organizations design, develop, modernize, and scale digital solutions that drive efficiency, performance, and growth.',
+      'From custom application development to cloud transformation and data analytics, our engineering teams build reliable and future-ready solutions tailored to your business goals.'
+    ],
     approachTitle: 'Our Technology Delivery Approach',
     approachSteps: [
       { title: 'Discover', desc: 'Understand business goals, legacy pain points, and current operations.' },
@@ -192,104 +201,112 @@ export const SERVICES_DATA: ServiceCategory[] = [
     items: [
       {
         id: 'it-consulting',
-        title: 'IT Consulting',
-        description: 'Strategic Technology Guidance for Better Business Decisions. Our IT Consulting services help organizations align technology investments with business goals. We evaluate your current IT environment, identify gaps, and create roadmaps that improve efficiency, reduce risk, and support growth. Whether you are planning expansion, replacing outdated systems, or launching digital initiatives, we help you make smarter technology decisions.',
+        title: 'Custom Software Development',
+        description: 'We build secure, scalable, and user-focused applications tailored to unique business requirements.',
+        provideLabel: 'Solutions Include',
         provide: [
-          'IT Strategy & Roadmaps aligned with business vision, budgets, and growth priorities',
-          'Digital Transformation Consulting to modernize systems, workflows, and workflows',
-          'Infrastructure Consulting assessing networks, servers, and storage models',
-          'Technology Audits reviewing active applications, systems, and security compliance',
-          'IT Governance & Compliance planning, frameworks, and controls standards',
-          'Vendor Management for evaluating third-party software, integrations, and contracts'
+          'Enterprise Web Applications',
+          'SaaS Platforms',
+          'CRM & ERP Solutions',
+          'Internal Business Portals',
+          'API Development & Integration',
+          'Full Stack Development'
         ],
+        benefitsLabel: 'Technology Focus Area',
         benefits: [
-          'Significantly better return on investment (ROI) for IT spending',
-          'Improved daily operational efficiency and lower system downtime',
-          'Reduced security and operational risks through proactive monitoring',
-          'A crystal-clear digital growth strategy ready for scaling',
-          'Stronger system governance and compliance alignment'
+          'Frontend Development',
+          'Backend Development',
+          'Database Architecture',
+          'API Integration',
+          'Mobile-Friendly Platform',
+          'Scalable System Design'
         ]
       },
       {
         id: 'web-development',
-        title: 'Web Development',
-        description: 'Build Powerful Digital Experiences That Drive Results. Your website is often the first impression of your business. We create fast, secure, responsive, and visually engaging websites that strengthen brand credibility and improve customer engagement. From business websites to custom web platforms, our development team builds solutions that combine functionality with excellent user experience.',
+        title: 'Cloud & DevOps Solutions',
+        description: 'We help businesses accelerate deployment, scalability, and operational efficiency using modern cloud infrastructure.',
+        provideLabel: 'Services',
         provide: [
-          'Corporate Website Development reflecting premium business branding',
-          'E-Commerce Solutions featuring secure payment gateways and product scaling',
-          'Custom Web Applications, custom client portals, dashboards, and SaaS tools',
-          'Modern UI/UX Design focusing on conversions and smooth interactivity',
-          'CMS Development using headless frameworks, WordPress, Shopify, or custom solutions',
-          'Website Support & Maintenance, speed optimizations, updates, and daily backups'
+          'Cloud Migration',
+          'AWS / Azure / GCP Solutions',
+          'CI/CD Pipeline Automation',
+          'Infrastructure as Code (IaC)',
+          'Cloud Security & Monitoring',
+          'DevOps Consulting'
         ],
+        benefitsLabel: 'Benefits',
         benefits: [
-          'Strong and credible online presence reflecting premium standards',
-          'Enhanced customer experience leading to longer engagement',
-          'Higher conversion rates and business inquiry generation',
-          'Perfect mobile-first responsiveness across all screen sizes',
-          'A highly scalable platform capable of growing with your business'
+          'Faster deployment cycles',
+          'Improved infrastructure scalability',
+          'Reduce operation costs',
+          'Better system reliability',
+          'Automated workflows'
         ]
       },
       {
         id: 'cloud-solutions',
-        title: 'Cloud Solutions',
-        description: 'Flexible, Secure & Scalable Cloud Transformation. Cloud technology enables businesses to work faster, reduce costs, and scale efficiently. Our Cloud Solutions help organizations migrate, optimize, and manage cloud environments securely. We support businesses in leveraging leading cloud platforms while improving reliability, collaboration, and business continuity.',
+        title: 'QA & Testing Services',
+        description: 'Comprehensive testing solutions to ensure product quality, stability, and performance. We help businesses implement robust QA processes and testing frameworks that catch issues early and deliver reliable software.',
+        provideLabel: 'Testing Expertise',
         provide: [
-          'Cloud Deployments & Managed Services across AWS, Microsoft Azure, and GCP',
-          'End-to-end Cloud Migration of files, workloads, applications, and legacy servers',
-          'Multi-Cloud Strategy design for ultimate performance and server redundancy',
-          'DevOps & CI/CD pipeline implementation to automate code releases',
-          'Virtual infrastructure, load-balancers, and cloud database management',
-          'Advanced Cloud Security including identity access controls and encryption',
-          'Robust Backup & Disaster Recovery planning with rapid failover solutions'
+          'Automation Testing ',
+          'Functional Testing ',
+          'API Testing ',
+          'Regression Testing ',
+          'Performance Testing ',
+          'Security Testing ',
         ],
+        benefitsLabel: 'Quality Objectives',
         benefits: [
-          'Substantially lower physical hardware and maintenance costs',
-          'Instant, on-demand scalability for seasonal traffic and workloads',
-          'Improved employee collaboration across global remote teams',
-          'Virtually zero downtime through fault-tolerant cloud architecture',
-          'Unrivaled security posture backed by global cloud compliance standards'
+          'Reduce production issues',
+          'Improve product reliability',
+          'Enhance user experience ',
+          'Ensure system performance',
+          'Maintain release quality'
         ]
       },
       {
         id: 'automation',
-        title: 'Automation',
-        description: 'Smarter Processes. Faster Results. Lower Costs. Manual processes slow growth and increase errors. Our Automation Services help businesses streamline workflows, reduce repetitive tasks, and improve productivity through intelligent systems. We implement automation solutions that free teams to focus on strategic work.',
+        title: 'Data & Analytics Solutions',
+        description: 'We help organization transform data into actionable business insights. (OR) Turn data into actionable business insights with intelligent analytics and reporting solutions.',
+        provideLabel: 'Capabilities',
         provide: [
-          'Workflow Automation of approvals, employee onboarding, and operational requests',
-          'Business Process Automation targeting cross-departmental administrative routines',
-          'Robotic Process Automation (RPA) utilizing bots for data entry and reports',
-          'Custom CRM / ERP integrations connecting legacy databases with cloud platforms',
-          'Reporting Automation delivering real-time dashboards and weekly metrics',
-          'AI-powered Automation including smart routing, chatbots, and predictive workflows'
+          'Data Engineering',
+          'ETL Development',
+          'Dashboard & Reporting',
+          'Business Intelligence',
+          'Predictive Analytics',
+          'Data Visualization'
         ],
+        benefitsLabel: 'Business Outcomes',
         benefits: [
-          'Elimination of manual, repetitive tasks saving thousands of hours',
-          'Significantly faster transaction and request operational cycles',
-          'Substantially lower administrative and operational costs',
-          'Drastic reduction in human errors during data inputs and processing',
-          'Frees up teams to focus on highly strategic, revenue-generating tasks'
+          'Data-driven decision making',
+          'Improved reporting accuracy',
+          'Operational monitoring',
+          'Performance monitoring',
+          'Predictive business intelligence'
         ]
       },
       {
         id: 'cybersecurity',
-        title: 'Cybersecurity',
-        description: 'Protect What Matters Most. Cyber threats continue to evolve. Our Cybersecurity services help businesses protect systems, users, and sensitive data through proactive risk management and strong security frameworks. We help organizations reduce vulnerabilities, improve compliance, and build a secure digital environment.',
+        title: 'Application Modernization',
+        description: 'Modernize legacy systems to improve scalability, performance, and user experience.',
+        provideLabel: 'Modernization Services',
         provide: [
-          'Comprehensive Security Assessments identifying structural vulnerabilities and risks',
-          'Network Security modeling, firewalls, and secure remote VPN access',
-          'Endpoint Protection for staff laptops, mobiles, and distributed work environments',
-          'Identity & Access Management (IAM) implementing MFA and single-sign-on (SSO)',
-          'Compliance Support for ISO 27001, GDPR, HIPAA, and industry-specific regulations',
-          'Disaster Recovery and business incident response planning',
-          'Security Monitoring & continuous threat detection models'
+          'Legacy System Upgrade ',
+          'Platform Migration ',
+          'Architecture Modernization ',
+          'Application Optimization ',
+          'Maintenance & Support',
         ],
+        benefitsLabel: 'Advantages',
         benefits: [
-          'Proactive reduction in cybersecurity breach risks and threats',
-          'Strong compliance with local and international data security standards',
-          'Uncompromised protection of customer records, intellectual property, and files',
-          'A secure remote work environment that defends against phishing attacks',
-          'Absolute business continuity assurance, preventing costly operational halts'
+          'Enhanced system performance',
+          'Improved scalability',
+          'Better security',
+          'Reduced maintenance costs',
+          'Modern user experiences'
         ]
       }
     ]
@@ -305,7 +322,31 @@ export const JOB_LISTINGS: JobListing[] = [
     location: 'New York, NY (Hybrid)',
     experience: '5+ Years',
     description: 'We are seeking a Senior Business Analyst to assist client companies in analyzing operational workflows, designing KPI tracking metrics, and conducting process improvement audits using lean models.',
-    skills: ['Process Mapping', 'Business Analytics', 'Lean Six Sigma', 'Stakeholder Management']
+    skills: ['Process Mapping', 'Business Analytics', 'Lean Six Sigma', 'Stakeholder Management'],
+    responsibilities: [
+      'Analyze current business processes and operational workflows.',
+      'Design KPI tracking metrics and dashboards to measure performance.',
+      'Conduct process improvement audits using lean methodologies.',
+      'Collaborate with cross-functional teams and client stakeholders.',
+      'Prepare insights, recommendations, and presentations for clients.',
+      'Support the implementation of solutions and monitor outcomes.',
+    ],
+    requirements: [
+      '5+ years of experience in business analysis or consulting.',
+      'Strong experience in process mapping, KPI tracking, and data analysis.',
+      'Knowledge of Lean Six Sigma methodologies.',
+      'Excellent communication and stakeholder management skills.',
+      'Proficiency in SQL, Excel, and BI tools (e.g., Power BI, Tableau).',
+      "Bachelor's degree in Business, Engineering, or related field (MBA preferred).",
+    ],
+    whatWeOffer: [
+      { title: 'Competitive Salary', desc: 'Market-competitive pay with performance bonuses.' },
+      { title: 'Health & Wellness', desc: 'Comprehensive medical, dental, and vision coverage.' },
+      { title: 'Work-Life Balance', desc: 'Flexible work hours and hybrid work environment.' },
+      { title: 'Learning & Growth', desc: 'Access to training programs, certifications, and workshops.' },
+      { title: 'Collaborative Culture', desc: 'Work with talented professionals in a supportive environment.' },
+      { title: 'Additional Benefits', desc: '401(k) matching, paid time off, and more.' },
+    ],
   },
   {
     id: 'job-2',
@@ -315,7 +356,31 @@ export const JOB_LISTINGS: JobListing[] = [
     location: 'Global Remote',
     experience: '4+ Years',
     description: 'Join our Technology Services team to build state-of-the-art corporate web platforms, cloud-based applications, and e-commerce applications for our global clients.',
-    skills: ['React.js', 'TypeScript', 'Tailwind CSS', 'RESTful APIs', 'Next.js']
+    skills: ['React.js', 'TypeScript', 'Tailwind CSS', 'RESTful APIs', 'Next.js'],
+    responsibilities: [
+      'Develop high-performance, scalable frontend applications using React.js and TypeScript.',
+      'Collaborate with designers and backend engineers to deliver seamless user experiences.',
+      'Integrate RESTful APIs and third-party services into web platforms.',
+      'Participate in code reviews, architectural discussions, and sprint planning.',
+      'Optimize applications for speed, accessibility, and cross-browser compatibility.',
+      'Mentor junior developers and uphold engineering best practices.',
+    ],
+    requirements: [
+      '4+ years of professional React.js development experience.',
+      'Strong proficiency in TypeScript and modern JavaScript (ES2020+).',
+      'Experience with Tailwind CSS, component libraries, and design systems.',
+      'Solid understanding of RESTful API integration and state management (Redux/Zustand).',
+      'Familiarity with Next.js, SSR, and performance optimization techniques.',
+      "Bachelor's degree in Computer Science or equivalent practical experience.",
+    ],
+    whatWeOffer: [
+      { title: 'Competitive Salary', desc: 'Market-competitive pay with performance bonuses.' },
+      { title: 'Fully Remote', desc: 'Work from anywhere in the world with flexible hours.' },
+      { title: 'Health & Wellness', desc: 'Comprehensive medical, dental, and vision coverage.' },
+      { title: 'Learning & Growth', desc: 'Access to training programs, certifications, and workshops.' },
+      { title: 'Collaborative Culture', desc: 'Work with a global team of top-tier engineers.' },
+      { title: 'Additional Benefits', desc: 'Home office stipend, paid time off, and more.' },
+    ],
   },
   {
     id: 'job-3',
@@ -325,7 +390,31 @@ export const JOB_LISTINGS: JobListing[] = [
     location: 'San Francisco, CA (Hybrid)',
     experience: '6+ Years',
     description: 'We are looking for a cloud expert experienced with AWS and Azure to design CI/CD deployment pipelines, manage containerized environments, and optimize cloud security protocols.',
-    skills: ['AWS', 'Docker', 'Kubernetes', 'CI/CD', 'Terraform']
+    skills: ['AWS', 'Docker', 'Kubernetes', 'CI/CD', 'Terraform'],
+    responsibilities: [
+      'Design and maintain CI/CD pipelines for automated deployment workflows.',
+      'Manage containerized environments using Docker and Kubernetes.',
+      'Architect cloud infrastructure on AWS and Azure following best practices.',
+      'Implement cloud security protocols, access controls, and compliance standards.',
+      'Monitor system performance, uptime, and incident response.',
+      'Collaborate with development teams to streamline release cycles.',
+    ],
+    requirements: [
+      '6+ years of experience in DevOps, cloud architecture, or site reliability engineering.',
+      'Expert-level proficiency with AWS and/or Azure cloud platforms.',
+      'Strong hands-on experience with Docker, Kubernetes, and container orchestration.',
+      'Experience building and managing CI/CD pipelines (Jenkins, GitHub Actions, etc.).',
+      'Proficiency in infrastructure-as-code tools such as Terraform or CloudFormation.',
+      'Relevant cloud certifications (AWS Solutions Architect, Azure DevOps Engineer) preferred.',
+    ],
+    whatWeOffer: [
+      { title: 'Competitive Salary', desc: 'Market-competitive pay with performance bonuses.' },
+      { title: 'Health & Wellness', desc: 'Comprehensive medical, dental, and vision coverage.' },
+      { title: 'Hybrid Flexibility', desc: 'Hybrid work schedule with in-office collaboration days.' },
+      { title: 'Learning & Growth', desc: 'Cloud certification reimbursements and training budget.' },
+      { title: 'Collaborative Culture', desc: 'Work alongside world-class infrastructure engineers.' },
+      { title: 'Additional Benefits', desc: '401(k) matching, paid time off, and more.' },
+    ],
   },
   {
     id: 'job-4',
@@ -335,7 +424,31 @@ export const JOB_LISTINGS: JobListing[] = [
     location: 'Chicago, IL',
     experience: '3+ Years',
     description: 'Help us identify, evaluate, and attract top passive executives (C-level and Directors) for our premium enterprise clients. Exceptional communication skills are required.',
-    skills: ['Executive Search', 'Headhunting', 'Candidate Screening', 'Talent Mapping']
+    skills: ['Executive Search', 'Headhunting', 'Candidate Screening', 'Talent Mapping'],
+    responsibilities: [
+      'Source and engage passive C-level and Director-level candidates through direct outreach.',
+      'Conduct in-depth candidate screenings, competency interviews, and assessments.',
+      'Build and maintain a strong pipeline of senior executive talent across industries.',
+      'Partner with client stakeholders to understand leadership needs and culture fit.',
+      'Manage the full recruitment lifecycle from sourcing to offer negotiation.',
+      'Deliver market intelligence and talent mapping reports to clients.',
+    ],
+    requirements: [
+      '3+ years of experience in executive search or senior-level recruitment.',
+      'Proven track record of placing C-level or Director-level candidates.',
+      'Excellent interpersonal, negotiation, and communication skills.',
+      'Strong network within corporate and enterprise talent communities.',
+      'Experience using LinkedIn Recruiter, ATS platforms, and CRM tools.',
+      "Bachelor's degree in Human Resources, Business, or related field.",
+    ],
+    whatWeOffer: [
+      { title: 'Competitive Salary', desc: 'Base salary plus uncapped placement commissions.' },
+      { title: 'Health & Wellness', desc: 'Comprehensive medical, dental, and vision coverage.' },
+      { title: 'Work-Life Balance', desc: 'Flexible work hours and hybrid-friendly environment.' },
+      { title: 'Learning & Growth', desc: 'Access to recruitment training programs and industry events.' },
+      { title: 'Collaborative Culture', desc: 'Join a high-performing, supportive recruitment team.' },
+      { title: 'Additional Benefits', desc: '401(k) matching, paid time off, and more.' },
+    ],
   },
   {
     id: 'job-5',
@@ -345,8 +458,32 @@ export const JOB_LISTINGS: JobListing[] = [
     location: 'Remote',
     experience: '3+ Years',
     description: 'Develop and deploy robotic process automation bots (UiPath, Power Automate) to automate repetitive data-entry and workflow approvals for global clients.',
-    skills: ['RPA', 'UiPath', 'Power Automate', 'Python', 'Process Automation']
-  }
+    skills: ['RPA', 'UiPath', 'Power Automate', 'Python', 'Process Automation'],
+    responsibilities: [
+      'Design, develop, and deploy RPA bots using UiPath and Power Automate.',
+      'Identify automation opportunities by analyzing existing manual workflows.',
+      'Collaborate with business analysts and process owners to define automation scope.',
+      'Test, debug, and maintain automation scripts for production reliability.',
+      'Document bot architecture, workflows, and operational runbooks.',
+      'Provide support and optimization for deployed automation solutions.',
+    ],
+    requirements: [
+      '3+ years of experience in RPA development (UiPath, Power Automate, or Blue Prism).',
+      'Strong understanding of business process analysis and workflow optimization.',
+      'Proficiency in Python or VBA for scripting and data manipulation.',
+      'Experience integrating RPA with ERP systems, APIs, and databases.',
+      'Excellent analytical and problem-solving skills.',
+      'RPA certification (UiPath Certified Developer or equivalent) is a plus.',
+    ],
+    whatWeOffer: [
+      { title: 'Competitive Rate', desc: 'Competitive contract hourly rate with renewal opportunities.' },
+      { title: 'Fully Remote', desc: 'Work remotely with a flexible engagement schedule.' },
+      { title: 'Cutting-Edge Projects', desc: 'Work on enterprise-grade automation for global clients.' },
+      { title: 'Learning & Growth', desc: 'Access to RPA tools, training resources, and certifications.' },
+      { title: 'Collaborative Culture', desc: 'Integrated team environment with direct client exposure.' },
+      { title: 'Additional Benefits', desc: 'Performance-based bonuses and contract extensions.' },
+    ],
+  },
 ];
 
 export const BLOG_POSTS: BlogPost[] = [

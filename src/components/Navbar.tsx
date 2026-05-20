@@ -37,29 +37,28 @@ export default function Navbar({ currentPage, setCurrentPage, onNavigateToServic
     consulting: {
       title: 'Consulting Services',
       items: [
-        { id: 'business-strategy', label: 'Business Strategy' },
-        { id: 'process-improvement', label: 'Process Improvement' },
-        { id: 'vendor-management', label: 'Vendor Management' },
-        { id: 'growth-planning', label: 'Growth Planning' }
+        { id: 'business-strategy', label: 'Managed Vendor Support' },
+        { id: 'process-improvement', label: 'Offshore Delivery Partnership' },
+        { id: 'vendor-management', label: 'White-Label IT Services' },
+        { id: 'growth-planning', label: 'Project-Based Engagements' }
       ]
     },
     staffing: {
       title: 'Staffing Solutions',
       items: [
-        { id: 'permanent-hiring', label: 'Permanent Hiring' },
-        { id: 'contract-staffing', label: 'Contract Staffing' },
-        { id: 'executive-search', label: 'Executive Search' },
-        { id: 'workforce-planning', label: 'Workforce Planning' }
+        { id: 'permanent-hiring', label: 'IT Contract & Permanent Staffing' },
+        { id: 'contract-staffing', label: 'Dedicated Development Teams' },
+        { id: 'executive-search', label: 'Recruitment Process Outsourcing (RPO)' },
       ]
     },
     technology: {
       title: 'Technology Services',
       items: [
-        { id: 'it-consulting', label: 'IT Consulting' },
-        { id: 'web-development', label: 'Web Development' },
-        { id: 'cloud-solutions', label: 'Cloud Solutions' },
-        { id: 'automation', label: 'Automation' },
-        { id: 'cybersecurity', label: 'Cybersecurity' }
+        { id: 'it-consulting', label: 'Custom Software Development' },
+        { id: 'web-development', label: 'Cloud & DevOps Solutions' },
+        { id: 'cloud-solutions', label: 'QA & Testing Services' },
+        { id: 'automation', label: 'Data & Analytics Solutions' },
+        { id: 'cybersecurity', label: 'Application Modernization' }
       ]
     }
   };
@@ -115,8 +114,7 @@ export default function Navbar({ currentPage, setCurrentPage, onNavigateToServic
               {/* Premium Mega-Menu / Services Dropdown */}
               <div className="relative group">
                 <button
-                  onClick={() => setCurrentPage('services')}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-all flex items-center space-x-1 ${
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-all flex items-center space-x-1 cursor-default ${
                     isServicesPage ? 'text-[#00BFEF] bg-slate-50 font-semibold' : 'text-slate-600 hover:text-slate-900'
                   }`}
                 >
@@ -124,8 +122,9 @@ export default function Navbar({ currentPage, setCurrentPage, onNavigateToServic
                   <ChevronDown className="h-4 w-4 transition-transform duration-300 group-hover:rotate-180" />
                 </button>
 
-                {/* Mega-menu dropdown */}
-                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-[820px] bg-white rounded-2xl shadow-2xl border border-gray-100 p-6 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300 grid grid-cols-3 gap-6">
+                {/* Mega-menu dropdown — transparent outer div is flush to button (no gap) so cursor stays inside group */}
+                <div className="absolute top-full left-1/2 -translate-x-1/2 w-[820px] pt-2 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300">
+                <div className="bg-white rounded-2xl shadow-2xl border border-gray-100 p-6 grid grid-cols-3 gap-6">
 
                   {/* Consulting Services column */}
                   <div className="space-y-4">
@@ -205,6 +204,7 @@ export default function Navbar({ currentPage, setCurrentPage, onNavigateToServic
                     </ul>
                   </div>
 
+                </div>
                 </div>
               </div>
 

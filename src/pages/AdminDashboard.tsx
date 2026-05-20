@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from 'react';
+import QuillEditor from '../components/QuillEditor';
 import { useJobs, useBlogs, useAdminAuth } from '../hooks/useDataStore';
 import { JobListing, BlogPost } from '../types';
 import {
@@ -20,7 +21,8 @@ import {
   MapPin,
   Eye,
   Sparkles,
-  Tag
+  Tag,
+  ChevronDown
 } from 'lucide-react';
 
 type Tab = 'overview' | 'jobs' | 'blogs';
@@ -38,6 +40,12 @@ export default function AdminDashboard({ onLogout }: AdminDashboardProps) {
   const [searchTerm, setSearchTerm] = useState('');
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
   const [confirmDelete, setConfirmDelete] = useState<{ type: 'job' | 'blog'; id: string; title: string } | null>(null);
+
+  // Job filters
+  const [jobFilterRole, setJobFilterRole] = useState('');
+  const [jobFilterLocation, setJobFilterLocation] = useState('');
+  const [jobFilterExperience, setJobFilterExperience] = useState('');
+  const [jobFilterType, setJobFilterType] = useState('');
 
   // Job modal
   const [showJobModal, setShowJobModal] = useState(false);
@@ -93,12 +101,20 @@ export default function AdminDashboard({ onLogout }: AdminDashboardProps) {
     setConfirmDelete(null);
   };
 
-  const filteredJobs = jobs.filter(
-    (j) =>
-      j.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      j.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      j.category.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const uniqueJobRoles = Array.from(new Set(jobs.map(j => j.title)));
+  const uniqueJobLocations = Array.from(new Set(jobs.map(j => j.location)));
+  const uniqueJobExperience = Array.from(new Set(jobs.map(j => j.experience)));
+  const uniqueJobTypes = Array.from(new Set(jobs.map(j => j.type)));
+
+  const filteredJobs = jobs.filter((j) => {
+    const q = searchTerm.toLowerCase();
+    const matchesSearch = !q || j.title.toLowerCase().includes(q) || j.location.toLowerCase().includes(q) || j.category.toLowerCase().includes(q);
+    const matchesRole = !jobFilterRole || j.title === jobFilterRole;
+    const matchesLocation = !jobFilterLocation || j.location === jobFilterLocation;
+    const matchesExperience = !jobFilterExperience || j.experience === jobFilterExperience;
+    const matchesType = !jobFilterType || j.type === jobFilterType;
+    return matchesSearch && matchesRole && matchesLocation && matchesExperience && matchesType;
+  });
 
   const filteredBlogs = blogs.filter(
     (b) =>
@@ -230,6 +246,36 @@ export default function AdminDashboard({ onLogout }: AdminDashboardProps) {
               addLabel="Post New Job"
               onReset={() => { resetJobs(); showToast('Jobs reset to default demo data.'); }}
             />
+
+            {/* Job Filters */}
+            <div className="flex flex-wrap gap-3">
+              {[
+                { label: 'Role', value: jobFilterRole, setter: setJobFilterRole, options: uniqueJobRoles },
+                { label: 'Location', value: jobFilterLocation, setter: setJobFilterLocation, options: uniqueJobLocations },
+                { label: 'Experience', value: jobFilterExperience, setter: setJobFilterExperience, options: uniqueJobExperience },
+                { label: 'Type', value: jobFilterType, setter: setJobFilterType, options: uniqueJobTypes },
+              ].map(({ label, value, setter, options }) => (
+                <div key={label} className="relative">
+                  <select
+                    value={value}
+                    onChange={e => setter(e.target.value)}
+                    className="appearance-none rounded-xl border border-slate-200 bg-white pl-3 pr-8 py-2.5 text-xs text-slate-700 outline-none focus:border-[#5EE3B7] focus:ring-4 focus:ring-[#5EE3B7]/10 transition-all cursor-pointer"
+                  >
+                    <option value="">All {label}s</option>
+                    {options.map(opt => <option key={opt} value={opt}>{opt}</option>)}
+                  </select>
+                  <ChevronDown className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 h-3 w-3 text-slate-400" />
+                </div>
+              ))}
+              {(jobFilterRole || jobFilterLocation || jobFilterExperience || jobFilterType) && (
+                <button
+                  onClick={() => { setJobFilterRole(''); setJobFilterLocation(''); setJobFilterExperience(''); setJobFilterType(''); }}
+                  className="rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-xs font-semibold text-slate-500 hover:bg-slate-50 transition-all"
+                >
+                  Clear Filters
+                </button>
+              )}
+            </div>
 
             {filteredJobs.length === 0 ? (
               <EmptyState icon={<Briefcase className="h-10 w-10" />} title="No jobs found" desc={searchTerm ? 'Try a different search term.' : 'Click "Post New Job" to add one.'} />
@@ -648,7 +694,7 @@ function BlogFormModal({ initial, onClose, onSave }: { initial: BlogPost | null;
     if (!title.trim()) newErrors.title = 'Title is required';
     if (!author.trim()) newErrors.author = 'Author is required';
     if (!summary.trim()) newErrors.summary = 'Summary is required';
-    if (!content.trim()) newErrors.content = 'Content is required';
+    if (!content.replace(/<(.|\n)*?>/g, '').trim()) newErrors.content = 'Content is required';
     if (!image.trim()) newErrors.image = 'Image URL is required';
 
     if (Object.keys(newErrors).length > 0) {
@@ -663,13 +709,13 @@ function BlogFormModal({ initial, onClose, onSave }: { initial: BlogPost | null;
       author: author.trim(),
       readTime: readTime.trim(),
       summary: summary.trim(),
-      content: content.trim(),
+      content,
       image: image.trim(),
     });
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm p-4 overflow-y-auto animate-fade-in">
+    <div className="fixed inset-0 z-50 flex items-start justify-center bg-slate-900/50 backdrop-blur-sm p-4 overflow-y-auto animate-fade-in">
       <div className="w-full max-w-3xl rounded-3xl border border-slate-100 bg-white shadow-2xl my-8">
         <div className="flex items-center justify-between border-b border-slate-100 p-6">
           <div className="flex items-center gap-3">
@@ -725,8 +771,13 @@ function BlogFormModal({ initial, onClose, onSave }: { initial: BlogPost | null;
             <textarea rows={2} value={summary} onChange={(e) => setSummary(e.target.value)} placeholder="A brief summary of the blog post..." className={inputCls(!!errors.summary)} />
           </FormField>
 
-          <FormField label="Content *" error={errors.content} hint="Full blog content. Use blank lines to separate paragraphs.">
-            <textarea rows={8} value={content} onChange={(e) => setContent(e.target.value)} placeholder="Write your blog content here..." className={`${inputCls(!!errors.content)} font-mono text-[11px]`} />
+          <FormField label="Content *" error={errors.content} hint="Use the toolbar to format headings, bold, lists, links, and more.">
+            <QuillEditor
+              value={content}
+              onChange={setContent}
+              placeholder="Write your blog content here..."
+              hasError={!!errors.content}
+            />
           </FormField>
 
           <div className="flex gap-3 pt-2">

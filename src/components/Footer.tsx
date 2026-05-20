@@ -96,9 +96,9 @@ export default function Footer({ setCurrentPage }: FooterProps) {
               <li className="flex items-start space-x-3">
                 <MapPin className="h-5 w-5 text-[#5EE3B7] shrink-0 mt-0.5" />
                 <span>
-                  IVA Work Solutions Corporate HQ<br />
-                  120 Broadway, Suite 3200<br />
-                  New York, NY 10271
+                  WorkFlo Hitex Bizness Square, 4th Floor<br />
+                  Madhapur, Hyderabad<br />
+                  Telangana - 500081
                 </span>
               </li>
               <li className="flex items-center space-x-3">

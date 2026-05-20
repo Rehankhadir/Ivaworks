@@ -1,6 +1,8 @@
 import { useState, type FormEvent } from 'react';
 import { useJobs } from '../hooks/useDataStore';
 import { type JobListing } from '../types';
+import JobDetail from '../components/JobDetail';
+import ApplyModal from '../components/ApplyModal';
 import {
   Briefcase,
   MapPin,
@@ -15,39 +17,56 @@ import {
   Sparkles,
   Zap,
   GraduationCap,
-  Clock
+  Clock,
+  Search,
+  ChevronDown
 } from 'lucide-react';
 
 export default function Careers() {
   const [selectedJob, setSelectedJob] = useState<JobListing | null>(null);
-  const [filterCategory, setFilterCategory] = useState<string>('All');
+  const [viewJob, setViewJob] = useState<JobListing | null>(null);
+  const [applyModalJob, setApplyModalJob] = useState<JobListing | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filterRole, setFilterRole] = useState('');
+  const [filterLocation, setFilterLocation] = useState('');
+  const [filterSkill, setFilterSkill] = useState('');
+  const [filterExperience, setFilterExperience] = useState('');
 
   const [fullName, setFullName] = useState('');
+  const [role, setRole] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [address, setAddress] = useState('');
   const [qualification, setQualification] = useState('');
   const [experience, setExperience] = useState('');
   const [skills, setSkills] = useState('');
+  const [noticePeriod, setNoticePeriod] = useState('');
   const [resume, setResume] = useState<File | null>(null);
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const categories = ['All', 'Consulting', 'Staffing', 'Technology'];
   const { jobs } = useJobs();
 
-  const filteredJobs = filterCategory === 'All'
-    ? jobs
-    : jobs.filter(j => j.category === filterCategory);
+  const uniqueRoles = Array.from(new Set(jobs.map(j => j.title)));
+  const uniqueLocations = Array.from(new Set(jobs.map(j => j.location)));
+  const uniqueSkills = Array.from(new Set(jobs.flatMap(j => j.skills)));
+  const uniqueExperience = Array.from(new Set(jobs.map(j => j.experience)));
+
+  const filteredJobs = jobs.filter(j => {
+    const q = searchQuery.toLowerCase();
+    const matchesSearch = !q || j.title.toLowerCase().includes(q) || j.location.toLowerCase().includes(q) || j.skills.some(s => s.toLowerCase().includes(q));
+    const matchesRole = !filterRole || j.title === filterRole;
+    const matchesLocation = !filterLocation || j.location === filterLocation;
+    const matchesSkill = !filterSkill || j.skills.includes(filterSkill);
+    const matchesExperience = !filterExperience || j.experience === filterExperience;
+    return matchesSearch && matchesRole && matchesLocation && matchesSkill && matchesExperience;
+  });
 
   const handleApplyClick = (job: JobListing) => {
     setSelectedJob(job);
-    const formSection = document.getElementById('apply-form-section');
-    if (formSection) {
-      formSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    setApplyModalJob(job);
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -103,6 +122,17 @@ export default function Careers() {
     setSelectedJob(null);
   };
 
+  if (viewJob) {
+    return (
+      <div className="mx-auto max-w-4xl px-4 pt-28 sm:px-6 lg:px-8 pb-20">
+        <JobDetail
+          job={viewJob}
+          onBack={() => setViewJob(null)}
+        />
+      </div>
+    );
+  }
+
   return (
     <div className="pb-20">
 
@@ -133,24 +163,44 @@ export default function Careers() {
 
       {/* Openings + Benefits */}
       <section className="mx-auto max-w-7xl px-4 pt-14 sm:px-6 lg:px-8">
-        <div className="mb-10 flex flex-col gap-6 border-b border-slate-100 pb-6 md:flex-row md:items-end md:justify-between">
-          <div>
+        <div className="mb-10 border-b border-slate-100 pb-6">
+          <div className="mb-5">
             <span className="inline-block rounded-full bg-blue-50 px-3 py-1 text-xs font-bold uppercase tracking-widest text-[#00BFEF]">Open Positions</span>
             <h2 className="mt-3 text-3xl font-extrabold text-slate-950">Explore Opportunities</h2>
           </div>
-          <div className="flex flex-wrap gap-2">
-            {categories.map(cat => (
-              <button
-                key={cat}
-                onClick={() => setFilterCategory(cat)}
-                className={`rounded-xl border px-4 py-2 text-xs font-bold transition-all ${
-                  filterCategory === cat
-                    ? 'border-slate-950 bg-slate-950 text-white shadow-sm'
-                    : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
-                }`}
-              >
-                {cat}
-              </button>
+
+          {/* Search + Filters row */}
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+            {/* Search bar */}
+            <div className="relative flex-1">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 pointer-events-none" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={e => setSearchQuery(e.target.value)}
+                placeholder="Search by role, location, or skills..."
+                className="w-full rounded-xl border border-slate-200 bg-slate-50 pl-11 pr-4 py-2.5 text-xs text-slate-800 outline-none placeholder:text-slate-400 focus:border-[#5EE3B7] focus:bg-white focus:ring-4 focus:ring-[#5EE3B7]/10 transition-all"
+              />
+            </div>
+
+            {/* Filter dropdowns */}
+            {[
+              { label: 'Role', value: filterRole, setter: setFilterRole, options: uniqueRoles },
+              { label: 'Location', value: filterLocation, setter: setFilterLocation, options: uniqueLocations },
+              { label: 'Skills', value: filterSkill, setter: setFilterSkill, options: uniqueSkills },
+              { label: 'Experience', value: filterExperience, setter: setFilterExperience, options: uniqueExperience },
+            ].map(({ label, value, setter, options }) => (
+              <div key={label} className="relative shrink-0">
+                <select
+                  value={value}
+                  onChange={e => setter(e.target.value)}
+                  className="appearance-none rounded-xl border border-slate-200 bg-white px-3 py-2.5 pr-8 text-xs text-slate-700 outline-none focus:border-[#5EE3B7] focus:ring-4 focus:ring-[#5EE3B7]/10 transition-all cursor-pointer"
+                >
+                  <option value="">All {label}s</option>
+                  {options.map(opt => <option key={opt} value={opt}>{opt}</option>)}
+                </select>
+                <ChevronDown className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 h-3 w-3 text-slate-400" />
+              </div>
             ))}
           </div>
         </div>
@@ -162,7 +212,7 @@ export default function Careers() {
               <div className="rounded-2xl border border-slate-100 bg-slate-50 p-12 text-center">
                 <Briefcase className="mx-auto h-10 w-10 text-slate-400" />
                 <h4 className="mt-3 font-bold text-slate-700">No Open Positions</h4>
-                <p className="mt-1 text-xs text-slate-500">We don't have any openings in this category right now. Check back soon!</p>
+                <p className="mt-1 text-xs text-slate-500">No positions match your search or filters. Try adjusting your criteria.</p>
               </div>
             ) : (
               filteredJobs.map((job) => (
@@ -186,13 +236,21 @@ export default function Careers() {
                         <span className="flex items-center gap-1"><Calendar className="h-3.5 w-3.5" />Exp: {job.experience}</span>
                       </div>
                     </div>
-                    <button
-                      onClick={() => handleApplyClick(job)}
-                      className="shrink-0 self-start rounded-xl bg-slate-950 px-5 py-3 text-xs font-bold text-white transition-all hover:bg-slate-800 flex items-center gap-1"
-                    >
-                      <span>Apply Now</span>
-                      <ArrowRight className="h-3.5 w-3.5" />
-                    </button>
+                    <div className="flex shrink-0 self-start gap-2">
+                      <button
+                        onClick={() => setViewJob(job)}
+                        className="rounded-xl border border-slate-200 bg-white px-5 py-3 text-xs font-bold text-slate-700 transition-all hover:bg-slate-50 flex items-center gap-1"
+                      >
+                        <span>View</span>
+                      </button>
+                      <button
+                        onClick={() => handleApplyClick(job)}
+                        className="rounded-xl bg-slate-950 px-5 py-3 text-xs font-bold text-white transition-all hover:bg-slate-800 flex items-center gap-1"
+                      >
+                        <span>Apply Now</span>
+                        <ArrowRight className="h-3.5 w-3.5" />
+                      </button>
+                    </div>
                   </div>
 
                   <p className="mt-4 border-t border-slate-50 pt-4 text-xs leading-relaxed text-slate-600">
@@ -286,7 +344,7 @@ export default function Careers() {
               <div className="border-b border-slate-100 pb-6">
                 <span className="text-xs font-bold uppercase tracking-widest text-[#5EE3B7]">Talent Intake Form</span>
                 <h3 className="mt-1 text-2xl font-extrabold text-slate-950">
-                  {selectedJob ? `Apply for ${selectedJob.title}` : 'Submit Your Profile / General Application'}
+                  Submit Your Profile / General Application
                 </h3>
                 <p className="mt-1 text-xs text-slate-500">Complete the required details and upload your latest curriculum vitae.</p>
               </div>
@@ -303,6 +361,10 @@ export default function Careers() {
                   <label className="text-[10px] font-bold uppercase tracking-wider text-slate-700">Full Name *</label>
                   <input type="text" value={fullName} onChange={(e) => setFullName(e.target.value)} placeholder="Enter your full legal name" className={fieldClass(!!errors.fullName)} />
                   {errors.fullName && <span className="block text-[10px] font-medium text-red-500">{errors.fullName}</span>}
+                </div>
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-bold uppercase tracking-wider text-slate-700">Role</label>
+                  <input type="text" value={role} onChange={(e) => setRole(e.target.value)} placeholder="e.g. Senior Business Analyst" className={fieldClass()} />
                 </div>
                 <div className="space-y-1.5">
                   <label className="text-[10px] font-bold uppercase tracking-wider text-slate-700">Email Address *</label>
@@ -348,6 +410,22 @@ export default function Careers() {
                   </div>
                   {errors.experience && <span className="block text-[10px] font-medium text-red-500">{errors.experience}</span>}
                 </div>
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-bold uppercase tracking-wider text-slate-700">Notice Period</label>
+                  <div className="relative">
+                    <Clock className="absolute left-3.5 top-3.5 h-4 w-4 text-slate-400" />
+                    <select value={noticePeriod} onChange={(e) => setNoticePeriod(e.target.value)} className={`${fieldClass()} pl-10`}>
+                      <option value="">Select Notice Period</option>
+                      <option>Immediately Available</option>
+                      <option>1 Week</option>
+                      <option>2 Weeks</option>
+                      <option>1 Month</option>
+                      <option>2 Months</option>
+                      <option>3 Months</option>
+                      <option>More than 3 Months</option>
+                    </select>
+                  </div>
+                </div>
               </div>
 
               <div className="space-y-1.5">
@@ -380,13 +458,15 @@ export default function Careers() {
                 {isSubmitting ? (
                   <><div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></div><span>Processing Submission...</span></>
                 ) : (
-                  <><Send className="h-4 w-4" /><span>Submit Application Dossier</span></>
+                  <><Send className="h-4 w-4" /><span>Submit Application</span></>
                 )}
               </button>
             </form>
           )}
         </div>
       </section>
+
+      {applyModalJob && <ApplyModal job={applyModalJob} onClose={() => setApplyModalJob(null)} />}
     </div>
   );
 }

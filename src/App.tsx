@@ -180,15 +180,6 @@ export default function App() {
           <WhatsAppIcon className="h-6 w-6" />
         </a>
 
-        {/* Quick Call Button */}
-        <a 
-          href="tel:+1234567890"
-          className="h-12 w-12 rounded-full bg-gradient-to-tr from-[#5EE3B7] to-[#00BFEF] text-slate-950 flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-105"
-          title="Call IVA Work Solutions Support"
-        >
-          <Phone className="h-5 w-5" />
-        </a>
-
         {/* Scroll-to-Top Action Button */}
         {showScrollTop && (
           <button

@@ -42,15 +42,20 @@ export default function Home({ setCurrentPage }: HomeProps) {
                 <Zap className="h-3 w-3 animate-bounce text-[#00BFEF]" />
                 <span>For Job Seekers & Employers</span>
               </div>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-none text-slate-950">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-none text-slate-950">
                 IVA Work Solutions <br />
                 <span className="bg-gradient-to-r from-[#5EE3B7] to-[#00BFEF] bg-clip-text text-transparent">
-                  Jobs, Staffing & Technology
+                  Jobs·Staffing·Technology
                 </span>
               </h1>
               <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-2xl">
-                IVA Work Solutions connects skilled job seekers with the right career opportunities and helps employers find dependable talent for permanent, contract, executive, and technology hiring needs. Employees can submit their profile and upload a resume, while employers can share workforce requirements and connect with our experts for the next steps.
+                We help businesses scale with the right people, smart consulting, and modern technology solutions. IVA Work Solutions specializes in recruitment, workforce management, IT consulting, and digital services designed to support business growth and innovation. 
               </p>
+              <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-2xl">
+                For job seekers, we provide access to exciting career opportunities across multiple industries. For employers, we deliver dependable staffing solutions, technology expertise, and consulting support to build stronger teams and smarter operations.              
+              </p>
+              <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-2xl">
+                Your growth starts with the right partnership.              </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <button onClick={() => setCurrentPage('careers')} className="bg-gradient-to-r from-[#5EE3B7] to-[#00BFEF] text-white font-bold px-8 py-4 rounded-xl shadow-lg hover:shadow-cyan-500/25 hover:scale-[1.02] transition-all duration-300 flex items-center justify-center space-x-2 text-sm sm:text-base group">
                   <span>Apply for Jobs</span>
@@ -167,7 +172,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
               <div className="h-14 w-14 rounded-2xl bg-[#5EE3B7]/10 flex items-center justify-center text-[#5EE3B7] font-bold text-2xl group-hover:scale-110 transition-transform">01</div>
               <div className="space-y-2">
                 <h3 className="text-xl font-bold text-slate-900">Consulting Services</h3>
-                <p className="text-slate-600 text-sm leading-relaxed">Helping businesses improve strategy, efficiency, growth, and decision-making. We lay down custom operational architectures and roadmaps designed to perform.</p>
+                <p className="text-slate-600 text-sm leading-relaxed">We operate as a structured vendor partner, ensuring seamless alignment with client hiring workflows, compliance standards, and delivery expectations.</p>
               </div>
             </div>
             <button onClick={() => setCurrentPage('services')} className="mt-8 text-sm font-bold text-[#5EE3B7] flex items-center space-x-2 group-hover:text-slate-900 transition-colors">
@@ -180,7 +185,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
               <div className="h-14 w-14 rounded-2xl bg-[#00BFEF]/10 flex items-center justify-center text-[#00BFEF] font-bold text-2xl group-hover:scale-110 transition-transform">02</div>
               <div className="space-y-2">
                 <h3 className="text-xl font-bold text-slate-900">Staffing Solutions</h3>
-                <p className="text-slate-600 text-sm leading-relaxed">Providing skilled talent for permanent, contract, and remote workforce needs. We leverage high-performance databases and passive networks to deploy experts.</p>
+                <p className="text-slate-600 text-sm leading-relaxed">We provide high-performing IT professionals aligned to complex enterprise requirements, enabling organizations to scale teams on demand with speed and precision.</p>
               </div>
             </div>
             <button onClick={() => setCurrentPage('services')} className="mt-8 text-sm font-bold text-[#00BFEF] flex items-center space-x-2 group-hover:text-slate-900 transition-colors">
@@ -193,7 +198,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
               <div className="h-14 w-14 rounded-2xl bg-emerald-50 flex items-center justify-center text-emerald-500 font-bold text-2xl group-hover:scale-110 transition-transform">03</div>
               <div className="space-y-2">
                 <h3 className="text-xl font-bold text-slate-900">Technology Services</h3>
-                <p className="text-slate-600 text-sm leading-relaxed">Modern IT solutions including development, automation, cloud, and support. We secure and accelerate databases and processes with future-ready integrations.</p>
+                <p className="text-slate-600 text-sm leading-relaxed">We design, build, and modernize enterprise-grade applications across web, cloud, and data ecosystems.</p>
               </div>
             </div>
             <button onClick={() => setCurrentPage('services')} className="mt-8 text-sm font-bold text-emerald-500 flex items-center space-x-2 group-hover:text-slate-900 transition-colors">
@@ -259,9 +264,9 @@ export default function Home({ setCurrentPage }: HomeProps) {
             <span className="text-xs font-bold uppercase tracking-widest text-[#00BFEF] bg-blue-50 px-3.5 py-1.5 rounded-full inline-block">Who We Are</span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-950">Your Trusted Growth Partner</h2>
             <div className="space-y-4 text-slate-600 text-sm sm:text-base leading-relaxed">
-              <p>IVA Work Solutions is a trusted IT consulting & Technology company dedicated to helping businesses navigate today's fast-changing digital world with confidence. We provide innovative technology solutions, strategic guidance, and expert support that enable organizations to improve efficiency, streamline operations, and accelerate growth.</p>
-              <p>As a modern consulting partner, we specialize in understanding business challenges and transforming them into scalable technology opportunities. From IT strategy and digital transformation to cloud solutions, system optimization, and workforce support, we deliver customized services designed to meet the unique goals of every client.</p>
-              <p>At IVA Work Solutions, we believe technology should empower businesses, not complicate them. Our team combines industry expertise, practical insights, and a results-driven approach to create solutions that deliver measurable value. We are more than consultants — we are your technology growth partners.</p>
+              <p>IVA Work Solutions is a startup focused on delivering end-to-end IT and talent solutions for modern businesses. As a trusted consulting, staffing, and technology company, we help organizations succeed in today’s fast-changing digital world through innovative solutions, strategic workforce support, and expert technology services.</p>
+              <p>As a modern consulting and delivery partner, we specialize in understanding business challenges and transforming them into scalable opportunities through the right combination of talent and technology. From IT staffing and vendor partnerships to digital transformation, cloud solutions, system optimization, and software services, we deliver customized solutions tailored to the unique goals of every client.</p>
+              <p>At IVA Work Solutions, we believe businesses grow stronger with the right people, processes, and technology. Our team combines industry expertise, practical insights, and a results-driven approach to deliver measurable value with speed, flexibility, and reliability. We are more than a service provider — we are your long-term growth and technology partner.</p>
             </div>
             <div className="pt-4">
               <button onClick={() => setCurrentPage('about')} className="bg-gradient-to-r from-[#5EE3B7] to-[#00BFEF] text-slate-900 font-bold px-6 py-3.5 rounded-xl text-sm transition-all shadow-md hover:shadow-lg">

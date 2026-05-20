@@ -12,7 +12,7 @@ import {
   Users,
   FileText,
   MapPinned,
-  ChevronRight
+
 } from 'lucide-react';
 
 export default function Contact() {
@@ -111,7 +111,7 @@ export default function Contact() {
 
             <div className="space-y-4">
               {[
-                { icon: <MapPin className="h-5 w-5 text-[#5EE3B7]" />, title: 'Corporate Headquarters', content: <>IVA Work Solutions Corporate HQ<br />120 Broadway, Suite 3200<br />New York, NY 10271</> },
+                { icon: <MapPin className="h-5 w-5 text-[#5EE3B7]" />, title: 'Corporate Headquarters', content: <>WorkFlo Hitex Bizness Square, 4th Floor<br />Madhapur, Hyderabad, Telangana - 500081</> },
                 { icon: <Phone className="h-5 w-5 text-[#00BFEF]" />, title: 'Direct Support Phone', content: <><a href="tel:+1234567890" className="font-semibold text-slate-700 hover:text-slate-950">+1 (212) 555-0199</a><br />Available Mon-Fri, 9:00 AM - 6:00 PM EST</> },
                 { icon: <Mail className="h-5 w-5 text-[#5EE3B7]" />, title: 'Direct Coordinator Email', content: <><a href="mailto:info@ivaworksolutions.com" className="font-semibold text-slate-700 hover:text-slate-950">info@ivaworksolutions.com</a><br />Inquiries reviewed within 1 business day</> }
               ].map((item) => (
@@ -175,7 +175,7 @@ export default function Contact() {
                   <div className="space-y-1.5"><label className="text-[10px] font-bold uppercase tracking-wider text-slate-700">Job Requirements / Scope *</label><div className="relative"><FileText className="absolute left-3.5 top-3.5 h-4 w-4 text-slate-400" /><textarea rows={4} value={jobDescription} onChange={(e) => setJobDescription(e.target.value)} placeholder="e.g. We require 4 Senior Full-Stack Developers on a 12-month contract basis to assist with database virtualization." className={`${fieldClass(!!errors.jobDescription)} pl-10`} /></div>{errors.jobDescription && <span className="block text-[10px] font-medium text-red-500">{errors.jobDescription}</span>}</div>
 
                   <button type="submit" disabled={isSubmitting} className="flex w-full items-center justify-center space-x-2 rounded-xl bg-gradient-to-r from-[#5EE3B7] to-[#00BFEF] py-3.5 text-xs font-extrabold text-white shadow-md transition-all hover:scale-[1.01] hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-70">
-                    {isSubmitting ? <><div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></div><span>Submitting Requirements...</span></> : <><Send className="h-4 w-4" /><span>Send Corporate Inquiry Dossier</span></>}
+                    {isSubmitting ? <><div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></div><span>Submitting Requirements...</span></> : <><Send className="h-4 w-4" /><span>Send Corporate Inquiry</span></>}
                   </button>
                 </form>
               )}
@@ -184,22 +184,6 @@ export default function Contact() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 pt-20 sm:px-6 lg:px-8">
-        <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <span className="inline-block rounded-full bg-[#5EE3B7]/10 px-3 py-1 text-xs font-bold uppercase tracking-widest text-[#5EE3B7]">Location</span>
-            <h2 className="mt-3 text-3xl font-extrabold text-slate-950">Visit Our Corporate Office</h2>
-          </div>
-          <a href="https://www.google.com/maps/search/?api=1&query=120+Broadway+New+York+NY+10271" target="_blank" rel="noreferrer" className="inline-flex items-center space-x-2 text-xs font-bold text-[#00BFEF] hover:text-slate-950">
-            <span>Open in Google Maps</span>
-            <ChevronRight className="h-4 w-4" />
-          </a>
-        </div>
-
-        <div className="relative min-h-[320px] overflow-hidden rounded-3xl border border-slate-100 shadow-sm aspect-[21/9]">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3024.4170889241513!2d-74.0112443!3d40.707787!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a1768436b7b%3A0xe5a36371752b0f3e!2s120%20Broadway%2C%20New%20York%2C%20NY%2010271!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus" width="100%" height="100%" style={{ border: 0 }} allowFullScreen={true} loading="lazy" referrerPolicy="no-referrer-when-downgrade" title="IVA Work Solutions Corporate Headquarters Location"></iframe>
-        </div>
-      </section>
     </div>
   );
 }

@@ -140,11 +140,15 @@ export default function About() {
               </div>
 
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-none text-slate-950">
-                Our{' '}
+               
                 <span className="bg-gradient-to-r from-[#5EE3B7] to-[#00BFEF] bg-clip-text text-transparent">
-                  Story
+                  IVA Work Solutions
                 </span>
               </h1>
+
+              <p className="text-lg sm:text-xl font-semibold text-slate-700 leading-relaxed border-l-4 border-[#5EE3B7] pl-4 italic">
+                "One Stop Solution for All Your Business Needs."
+              </p>
 
               <div className="text-slate-600 text-base sm:text-lg leading-relaxed space-y-4">
                 <p>
