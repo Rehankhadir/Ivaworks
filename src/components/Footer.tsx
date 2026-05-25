@@ -1,5 +1,6 @@
 import { Page } from '../types';
 import { Mail, Phone, MapPin, ExternalLink, MessageSquare } from 'lucide-react';
+import logo from '../assets/logo.png';
 
 interface FooterProps {
   setCurrentPage: (page: Page) => void;
@@ -15,34 +16,13 @@ export default function Footer({ setCurrentPage }: FooterProps) {
           
           {/* Brand Identity */}
           <div className="space-y-4">
-            <div className="flex items-center space-x-3 cursor-pointer group" onClick={() => setCurrentPage('home')}>
-              <div className="h-10 w-10 rounded-xl bg-gradient-to-tr from-[#5EE3B7] to-[#00BFEF] p-[2px] shadow-md">
-                <div className="h-full w-full bg-slate-900 rounded-[10px] flex items-center justify-center">
-                  <span className="text-white font-extrabold text-lg tracking-wider bg-gradient-to-tr from-[#5EE3B7] to-[#00BFEF] bg-clip-text text-transparent">IVA</span>
-                </div>
-              </div>
-              <div>
-                <span className="text-xl font-extrabold text-white tracking-tight block">
-                  IVA <span className="bg-gradient-to-r from-[#5EE3B7] to-[#00BFEF] bg-clip-text text-transparent">Work Solutions</span>
-                </span>
-                <span className="text-[10px] tracking-widest text-slate-400 uppercase font-bold block -mt-1">Consulting & Tech</span>
-              </div>
+            <div className="cursor-pointer" onClick={() => setCurrentPage('home')}>
+              <img src={logo} alt="IVA Work Solutions Logo" className="object-contain h-12 w-auto" />
             </div>
             <p className="text-sm text-slate-400 leading-relaxed">
               From expert consulting and strategic staffing to innovative technology solutions, IVA Work Solutions delivers everything your business needs under one roof. We simplify challenges, accelerate growth, and provide the right solutions to help you succeed in a fast-changing world.
             </p>
-            <div className="flex space-x-4 pt-2">
-              {/* WhatsApp Quick Chat */}
-              <a 
-                href="https://wa.me/1234567890" 
-                target="_blank" 
-                rel="noreferrer" 
-                className="h-9 w-9 rounded-lg bg-emerald-950 hover:bg-emerald-900 border border-emerald-500/20 flex items-center justify-center text-[#5EE3B7] transition-colors"
-                title="Chat with us on WhatsApp"
-              >
-                <MessageSquare className="h-4 w-4" />
-              </a>
-            </div>
+           
           </div>
 
           {/* Quick Nav Links */}
@@ -117,7 +97,7 @@ export default function Footer({ setCurrentPage }: FooterProps) {
         {/* Lower Footer */}
         <div className="pt-8 border-t border-slate-900 text-xs text-slate-500 flex flex-col sm:flex-row justify-between items-center gap-4">
           <div>
-            &copy; {currentYear} IVA Work Solutions. All rights reserved. May 2026 Foundation.
+            &copy; {currentYear} IVA Work Solutions. All rights reserved. 
           </div>
           <div className="flex space-x-6">
             <a href="#privacy" className="hover:text-slate-400 hover:underline flex items-center space-x-1">
