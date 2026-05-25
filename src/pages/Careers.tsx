@@ -304,15 +304,15 @@ export default function Careers() {
             {/* Quick stats */}
             <div className="grid grid-cols-3 gap-3 rounded-2xl border border-slate-100 bg-slate-50 p-4">
               <div className="text-center">
-                <span className="block bg-gradient-to-r from-[#5EE3B7] to-[#00BFEF] bg-clip-text text-xl font-extrabold text-transparent">5</span>
+                <span className="block bg-gradient-to-r from-[#5EE3B7] to-[#00BFEF] bg-clip-text text-xl font-extrabold text-transparent">{jobs.length}</span>
                 <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500">Openings</span>
               </div>
               <div className="text-center">
-                <span className="block bg-gradient-to-r from-[#5EE3B7] to-[#00BFEF] bg-clip-text text-xl font-extrabold text-transparent">3</span>
+                <span className="block bg-gradient-to-r from-[#5EE3B7] to-[#00BFEF] bg-clip-text text-xl font-extrabold text-transparent">{new Set(jobs.map(j => j.category)).size}</span>
                 <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500">Teams</span>
               </div>
               <div className="text-center">
-                <span className="block bg-gradient-to-r from-[#5EE3B7] to-[#00BFEF] bg-clip-text text-xl font-extrabold text-transparent">100%</span>
+                <span className="block bg-gradient-to-r from-[#5EE3B7] to-[#00BFEF] bg-clip-text text-xl font-extrabold text-transparent">{jobs.filter(j => j.type === 'Remote').length}</span>
                 <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500">Remote</span>
               </div>
             </div>
