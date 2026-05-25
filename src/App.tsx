@@ -32,6 +32,11 @@ export default function App() {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [showNotification, setShowNotification] = useState(true);
 
+  const navigateTo = (page: Page) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   // Handle deep-linking from navbar dropdown click
   const categoryToPageMap = {
     consulting: 'consulting-services',
@@ -125,9 +130,9 @@ export default function App() {
     <div className="min-h-screen bg-white text-slate-900 flex flex-col justify-between selection:bg-[#5EE3B7]/25">
       
       {/* Sticky Premium Navbar */}
-      <Navbar 
-        currentPage={currentPage} 
-        setCurrentPage={setCurrentPage} 
+      <Navbar
+        currentPage={currentPage}
+        setCurrentPage={navigateTo}
         onNavigateToService={handleNavigateToService}
         onNavigateToServiceCategory={handleNavigateToServiceCategory}
       />
@@ -164,7 +169,7 @@ export default function App() {
       </main>
 
       {/* Rich Corporate Footer */}
-      {!isAdminRoute && <Footer setCurrentPage={setCurrentPage} />}
+      {!isAdminRoute && <Footer setCurrentPage={navigateTo} />}
 
       {/* FLOATING ACTION UTILITIES */}
       {!isAdminRoute && <div className="fixed bottom-6 right-6 z-40 flex flex-col space-y-3 items-end">

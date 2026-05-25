@@ -41,6 +41,7 @@ export default function Careers() {
   const [experience, setExperience] = useState('');
   const [skills, setSkills] = useState('');
   const [noticePeriod, setNoticePeriod] = useState('');
+  const [panNumber, setPanNumber] = useState('');
   const [resume, setResume] = useState<File | null>(null);
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
@@ -93,6 +94,8 @@ export default function Careers() {
     if (!qualification) newErrors.qualification = 'Please select your highest qualification';
     if (!experience) newErrors.experience = 'Please select your years of experience';
     if (!skills.trim()) newErrors.skills = 'Please enter key professional skills';
+    if (!panNumber.trim()) newErrors.panNumber = 'PAN Number is required';
+    else if (!/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(panNumber.toUpperCase())) newErrors.panNumber = 'Enter a valid PAN number (e.g. ABCDE1234F)';
     if (!resume) newErrors.resume = 'Resume upload is required';
 
     if (Object.keys(newErrors).length > 0) {
@@ -117,6 +120,7 @@ export default function Careers() {
     setQualification('');
     setExperience('');
     setSkills('');
+    setPanNumber('');
     setResume(null);
     setIsSuccess(false);
     setSelectedJob(null);
@@ -140,7 +144,7 @@ export default function Careers() {
       <section className="relative overflow-hidden bg-white pt-24 pb-16">
         <div className="absolute inset-0 z-0 pointer-events-none">
           <div className="absolute top-0 left-0 h-full w-full bg-gradient-to-br from-[#5EE3B7]/10 via-transparent to-[#00BFEF]/10"></div>
-          <div className="absolute -top-40 -left-40 h-[480px] w-[480px] rounded-full bg-[#5EE3B7]/20 blur-[120px]"></div>
+          {/* <div className="absolute -top-40 -left-40 h-[480px] w-[480px] rounded-full bg-[#5EE3B7]/20 blur-[120px]"></div> */}
           <div className="absolute top-1/3 -right-40 h-[500px] w-[500px] rounded-full bg-[#00BFEF]/15 blur-[150px]"></div>
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#00000005_1px,transparent_1px),linear-gradient(to_bottom,#00000005_1px,transparent_1px)] bg-[size:40px_40px]"></div>
         </div>
@@ -375,6 +379,11 @@ export default function Careers() {
                   <label className="text-[10px] font-bold uppercase tracking-wider text-slate-700">Phone Number *</label>
                   <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+1 (555) 000-0000" className={fieldClass(!!errors.phone)} />
                   {errors.phone && <span className="block text-[10px] font-medium text-red-500">{errors.phone}</span>}
+                </div>
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-bold uppercase tracking-wider text-slate-700">PAN Number *</label>
+                  <input type="text" value={panNumber} onChange={(e) => setPanNumber(e.target.value.toUpperCase())} placeholder="e.g. ABCDE1234F" maxLength={10} className={fieldClass(!!errors.panNumber)} />
+                  {errors.panNumber && <span className="block text-[10px] font-medium text-red-500">{errors.panNumber}</span>}
                 </div>
                 <div className="space-y-1.5">
                   <label className="text-[10px] font-bold uppercase tracking-wider text-slate-700">Address *</label>

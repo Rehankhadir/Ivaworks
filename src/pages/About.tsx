@@ -70,8 +70,8 @@ export default function About() {
   const DecorativeShapes = () => (
     <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
       {/* Soft radial blobs */}
-      <div className="absolute -top-28 -left-28 w-[480px] h-[480px] rounded-full opacity-40"
-        style={{ background: 'radial-gradient(circle, #5EE3B7 0%, transparent 70%)' }} />
+      {/* <div className="absolute -top-28 -left-28 w-[480px] h-[480px] rounded-full opacity-40"
+        style={{ background: 'radial-gradient(circle, #5EE3B7 0%, transparent 70%)' }} /> */}
       <div className="absolute -bottom-36 -right-36 w-[520px] h-[520px] rounded-full opacity-30"
         style={{ background: 'radial-gradient(circle, #00BFEF 0%, transparent 70%)' }} />
 
@@ -124,7 +124,7 @@ export default function About() {
         {/* Home-aligned hero background starts behind the transparent header */}
         <div className="absolute inset-0 z-0 pointer-events-none">
           <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#5EE3B7]/10 via-transparent to-[#00BFEF]/10"></div>
-          <div className="absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#5EE3B7]/20 blur-[120px] animate-pulse"></div>
+          {/* <div className="absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#5EE3B7]/20 blur-[120px] animate-pulse"></div> */}
           <div className="absolute top-1/3 -right-40 w-[600px] h-[600px] rounded-full bg-[#00BFEF]/15 blur-[150px] animate-pulse delay-700"></div>
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#00000005_1px,transparent_1px),linear-gradient(to_bottom,#00000005_1px,transparent_1px)] bg-[size:40px_40px]"></div>
         </div>

@@ -24,6 +24,7 @@ export default function ApplyModal({ job, onClose }: Props) {
   const [qualification, setQualification] = useState('');
   const [experience, setExperience] = useState('');
   const [skills, setSkills] = useState('');
+  const [panNumber, setPanNumber] = useState('');
   const [noticePeriod, setNoticePeriod] = useState('');
   const [declaration, setDeclaration] = useState(false);
   const [resume, setResume] = useState<File | null>(null);
@@ -48,6 +49,8 @@ export default function ApplyModal({ job, onClose }: Props) {
     if (!qualification) newErrors.qualification = 'Please select your highest qualification';
     if (!experience) newErrors.experience = 'Please select your years of experience';
     if (!skills.trim()) newErrors.skills = 'Please enter key professional skills';
+    if (!panNumber.trim()) newErrors.panNumber = 'PAN Number is required';
+    else if (!/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(panNumber.toUpperCase())) newErrors.panNumber = 'Enter a valid PAN number (e.g. ABCDE1234F)';
     if (!resume) newErrors.resume = 'Resume upload is required';
     if (!declaration) newErrors.declaration = 'You must agree to the declaration before submitting';
 
@@ -131,6 +134,11 @@ export default function ApplyModal({ job, onClose }: Props) {
                   <label className="text-[10px] font-bold uppercase tracking-wider text-slate-700">Phone Number *</label>
                   <input type="tel" value={phone} onChange={e => setPhone(e.target.value)} placeholder="+1 (555) 000-0000" className={fieldClass(!!errors.phone)} />
                   {errors.phone && <span className="block text-[10px] font-medium text-red-500">{errors.phone}</span>}
+                </div>
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-bold uppercase tracking-wider text-slate-700">PAN Number *</label>
+                  <input type="text" value={panNumber} onChange={e => setPanNumber(e.target.value.toUpperCase())} placeholder="e.g. ABCDE1234F" maxLength={10} className={fieldClass(!!errors.panNumber)} />
+                  {errors.panNumber && <span className="block text-[10px] font-medium text-red-500">{errors.panNumber}</span>}
                 </div>
                 <div className="space-y-1.5">
                   <label className="text-[10px] font-bold uppercase tracking-wider text-slate-700">Address *</label>

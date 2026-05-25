@@ -575,6 +575,21 @@ function JobFormModal({ initial, onClose, onSave }: { initial: JobListing | null
   const [location, setLocation] = useState(initial?.location || '');
   const [experience, setExperience] = useState(initial?.experience || '');
   const [description, setDescription] = useState(initial?.description || '');
+  const [responsibilitiesInput, setResponsibilitiesInput] = useState(initial?.responsibilities.join('\n') || '');
+  const [requirementsInput, setRequirementsInput] = useState(initial?.requirements.join('\n') || '');
+  const OFFER_OPTIONS = [
+    { title: 'Competitive Salary', desc: 'Market-competitive pay with performance bonuses.' },
+    { title: 'Health & Wellness', desc: 'Comprehensive medical, dental, and vision coverage.' },
+    { title: 'Work-Life Balance', desc: 'Flexible work hours and hybrid work environment.' },
+    { title: 'Learning & Growth', desc: 'Access to training programs, certifications, and workshops.' },
+    { title: 'Collaborative Culture', desc: 'Work with talented professionals in a supportive environment.' },
+    { title: 'Additional Benefits', desc: '401(k) matching, paid time off, and more.' },
+  ];
+  const [selectedOffers, setSelectedOffers] = useState<Set<string>>(
+    new Set((initial?.whatWeOffer || []).map((o) => o.title))
+  );
+  const toggleOffer = (title: string) =>
+    setSelectedOffers((prev) => { const next = new Set(prev); next.has(title) ? next.delete(title) : next.add(title); return next; });
   const [skillsInput, setSkillsInput] = useState(initial?.skills.join(', ') || '');
   const [errors, setErrors] = useState<{ [k: string]: string }>({});
 
@@ -600,6 +615,9 @@ function JobFormModal({ initial, onClose, onSave }: { initial: JobListing | null
       experience: experience.trim(),
       description: description.trim(),
       skills: skillsInput.split(',').map((s) => s.trim()).filter(Boolean),
+      responsibilities: responsibilitiesInput.split('\n').map((s) => s.trim()).filter(Boolean),
+      requirements: requirementsInput.split('\n').map((s) => s.trim()).filter(Boolean),
+      whatWeOffer: OFFER_OPTIONS.filter((o) => selectedOffers.has(o.title)),
     });
   };
 
@@ -656,6 +674,46 @@ function JobFormModal({ initial, onClose, onSave }: { initial: JobListing | null
           <FormField label="Description *" error={errors.description}>
             <textarea rows={4} value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Describe the role, responsibilities, and what makes a great candidate..." className={inputCls(!!errors.description)} />
           </FormField>
+
+          <FormField label="Key Responsibilities" hint="Enter one responsibility per line — shown as a checklist on the job detail page.">
+            <textarea rows={5} value={responsibilitiesInput} onChange={(e) => setResponsibilitiesInput(e.target.value)} placeholder={"Analyze current business processes and workflows.\nDesign KPI tracking metrics and dashboards.\nCollaborate with cross-functional teams."} className={inputCls(false)} />
+          </FormField>
+
+          <FormField label="Requirements" hint="Enter one requirement per line — shown as a checklist on the job detail page.">
+            <textarea rows={5} value={requirementsInput} onChange={(e) => setRequirementsInput(e.target.value)} placeholder={"4+ years of professional experience.\nStrong proficiency in TypeScript.\nBachelor's degree or equivalent."} className={inputCls(false)} />
+          </FormField>
+
+          <div className="space-y-1.5">
+            <label className="text-[10px] font-bold uppercase tracking-wider text-slate-700">What We Offer</label>
+            <span className="block text-[10px] text-slate-400">Select the benefits to display on the job detail page.</span>
+            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+              {OFFER_OPTIONS.map((offer) => {
+                const selected = selectedOffers.has(offer.title);
+                return (
+                  <button
+                    key={offer.title}
+                    type="button"
+                    onClick={() => toggleOffer(offer.title)}
+                    className={`flex items-start gap-3 rounded-xl border p-3 text-left transition-all ${
+                      selected
+                        ? 'border-[#5EE3B7] bg-[#5EE3B7]/5 ring-2 ring-[#5EE3B7]/20'
+                        : 'border-slate-200 bg-slate-50 hover:border-slate-300'
+                    }`}
+                  >
+                    <div className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded border-2 transition-all ${
+                      selected ? 'border-[#5EE3B7] bg-[#5EE3B7]' : 'border-slate-300 bg-white'
+                    }`}>
+                      {selected && <CheckCircle2 className="h-3 w-3 text-white" />}
+                    </div>
+                    <div>
+                      <p className="text-xs font-bold text-slate-800">{offer.title}</p>
+                      <p className="text-[10px] text-slate-500 leading-relaxed">{offer.desc}</p>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
 
           <FormField label="Skills (comma separated) *" error={errors.skills} hint="e.g. React.js, TypeScript, Tailwind, Node.js">
             <input type="text" value={skillsInput} onChange={(e) => setSkillsInput(e.target.value)} placeholder="React, TypeScript, Tailwind, Node.js" className={inputCls(!!errors.skills)} />
