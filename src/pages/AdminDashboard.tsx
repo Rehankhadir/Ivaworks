@@ -622,7 +622,7 @@ function JobFormModal({ initial, onClose, onSave }: { initial: JobListing | null
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm p-4 overflow-y-auto animate-fade-in">
+    <div className="fixed inset-0 z-50 flex items-start justify-center bg-slate-900/50 backdrop-blur-sm p-4 overflow-y-auto animate-fade-in">
       <div className="w-full max-w-2xl rounded-3xl border border-slate-100 bg-white shadow-2xl my-8">
         <div className="flex items-center justify-between border-b border-slate-100 p-6">
           <div className="flex items-center gap-3">
