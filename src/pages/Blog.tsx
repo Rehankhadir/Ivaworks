@@ -27,7 +27,7 @@ export default function Blog() {
         <section className="relative overflow-hidden bg-white pt-24 pb-16">
           <div className="absolute inset-0 z-0 pointer-events-none">
             <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#5EE3B7]/10 via-transparent to-[#00BFEF]/10"></div>
-            {/* <div className="absolute -top-40 -left-40 w-[480px] h-[480px] rounded-full bg-[#5EE3B7]/20 blur-[120px]"></div> */}
+            <div className="absolute -top-20 -left-20 w-[480px] h-[480px] rounded-full bg-white blur-[80px]"></div>
             <div className="absolute top-1/3 -right-40 w-[500px] h-[500px] rounded-full bg-[#00BFEF]/15 blur-[150px]"></div>
           </div>
 

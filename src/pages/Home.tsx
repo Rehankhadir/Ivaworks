@@ -30,7 +30,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
       <section className="relative min-h-[90vh] flex items-center justify-center pt-24 overflow-hidden bg-white text-slate-900">
         <div className="absolute inset-0 z-0 overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#5EE3B7]/10 via-transparent to-[#00BFEF]/10"></div>
-          {/* <div className="absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#5EE3B7]/30 blur-[120px] animate-pulse"></div> */}
+          <div className="absolute -top-20 -left-20 w-[480px] h-[480px] rounded-full bg-white blur-[80px]"></div>
           <div className="absolute top-1/3 -right-40 w-[600px] h-[600px] rounded-full bg-[#00BFEF]/20 blur-[150px] animate-pulse delay-700"></div>
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#00000005_1px,transparent_1px),linear-gradient(to_bottom,#00000005_1px,transparent_1px)] bg-[size:40px_40px]"></div>
         </div>
