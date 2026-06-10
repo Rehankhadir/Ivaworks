@@ -45,7 +45,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-none text-slate-950">
                 IVA Work Solutions <br />
                 <span className="bg-gradient-to-r from-[#5EE3B7] to-[#00BFEF] bg-clip-text text-transparent">
-                  Jobs·Staffing·Technology
+                  Consulting·Staffing·Technology
                 </span>
               </h1>
               <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-2xl">

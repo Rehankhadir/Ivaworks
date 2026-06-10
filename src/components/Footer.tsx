@@ -39,7 +39,7 @@ export default function Footer({ setCurrentPage }: FooterProps) {
                 <button onClick={() => setCurrentPage('services')} className="hover:text-white hover:underline transition-all">Our Services</button>
               </li>
               <li>
-                <button onClick={() => setCurrentPage('careers')} className="hover:text-white hover:underline transition-all">Careers & Jobs</button>
+                <button onClick={() => setCurrentPage('careers')} className="hover:text-white hover:underline transition-all">Careers</button>
               </li>
               <li>
                 <button onClick={() => setCurrentPage('blog')} className="hover:text-white hover:underline transition-all">Insights & Blog</button>
@@ -83,7 +83,7 @@ export default function Footer({ setCurrentPage }: FooterProps) {
               </li>
               <li className="flex items-center space-x-3">
                 <Phone className="h-4 w-4 text-[#00BFEF] shrink-0" />
-                <a href="tel:+1234567890" className="hover:text-white transition-colors">+1 (212) 555-0199</a>
+                <a href="tel:+917075550125" className="hover:text-white transition-colors">+91 70755 50125</a>
               </li>
               <li className="flex items-center space-x-3">
                 <Mail className="h-4 w-4 text-[#5EE3B7] shrink-0" />

@@ -11,7 +11,7 @@ import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
 import { useAdminAuth } from './hooks/useDataStore';
 import { Page } from './types';
-import { Phone, ArrowUp, Sparkles, X, ChevronRight } from 'lucide-react';
+import { ArrowUp, Sparkles, X, ChevronRight } from 'lucide-react';
 
 // Official WhatsApp icon (lucide-react doesn't include brand icons)
 const WhatsAppIcon = ({ className }: { className?: string }) => (
@@ -20,8 +20,15 @@ const WhatsAppIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
+const validPages: Page[] = ['home', 'about', 'services', 'consulting-services', 'staffing-solutions', 'technology-services', 'careers', 'blog', 'contact', 'admin'];
+
+const getInitialPage = (): Page => {
+  const hash = window.location.hash.replace('#', '') as Page;
+  return validPages.includes(hash) ? hash : 'home';
+};
+
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<Page>('home');
+  const [currentPage, setCurrentPage] = useState<Page>(getInitialPage);
   const { isAuthenticated } = useAdminAuth();
 
   // States for sub-service deep linking
@@ -79,6 +86,24 @@ export default function App() {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Sync URL hash when currentPage changes
+  useEffect(() => {
+    if (window.location.hash.replace('#', '') !== currentPage) {
+      window.location.hash = currentPage;
+    }
+  }, [currentPage]);
+
+  // Handle browser back/forward navigation via hash change
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace('#', '') as Page;
+      const page = validPages.includes(hash) ? hash : 'home';
+      setCurrentPage(prev => (prev !== page ? page : prev));
+    };
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
   // Reset service selection when navigating away from service-related pages
@@ -176,7 +201,7 @@ export default function App() {
         
         {/* Live WhatsApp Floating Button */}
         <a 
-          href="https://wa.me/1234567890" 
+          href="https://wa.me/917075550125" 
           target="_blank" 
           rel="noreferrer"
           className="h-12 w-12 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-105"
