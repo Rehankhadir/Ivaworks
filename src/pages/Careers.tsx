@@ -19,13 +19,15 @@ import {
   GraduationCap,
   Clock,
   Search,
-  ChevronDown
+  ChevronDown,
+  X
 } from 'lucide-react';
 
 export default function Careers() {
   const [selectedJob, setSelectedJob] = useState<JobListing | null>(null);
   const [viewJob, setViewJob] = useState<JobListing | null>(null);
   const [applyModalJob, setApplyModalJob] = useState<JobListing | null>(null);
+  const [showGeneralForm, setShowGeneralForm] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [filterRole, setFilterRole] = useState('');
   const [filterLocation, setFilterLocation] = useState('');
@@ -42,6 +44,7 @@ export default function Careers() {
   const [skills, setSkills] = useState('');
   const [noticePeriod, setNoticePeriod] = useState('');
   const [panNumber, setPanNumber] = useState('');
+  const [linkedin, setLinkedin] = useState('');
   const [resume, setResume] = useState<File | null>(null);
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
@@ -53,7 +56,7 @@ export default function Careers() {
   const uniqueRoles = Array.from(new Set(jobs.map(j => j.title)));
   const uniqueLocations = Array.from(new Set(jobs.map(j => j.location)));
   const uniqueSkills = Array.from(new Set(jobs.flatMap(j => j.skills)));
-  const uniqueExperience = Array.from(new Set(jobs.map(j => j.experience)));
+  const experienceOptions = ['3+ Years', '4+ Years', '5+ Years', '6+ Years'];
 
   const filteredJobs = jobs.filter(j => {
     const q = searchQuery.toLowerCase();
@@ -61,7 +64,11 @@ export default function Careers() {
     const matchesRole = !filterRole || j.title === filterRole;
     const matchesLocation = !filterLocation || j.location === filterLocation;
     const matchesSkill = !filterSkill || j.skills.includes(filterSkill);
-    const matchesExperience = !filterExperience || j.experience === filterExperience;
+    const matchesExperience = !filterExperience || (() => {
+      const required = parseInt(filterExperience);
+      const jobYears = parseInt(j.experience);
+      return !isNaN(required) && !isNaN(jobYears) && jobYears >= required;
+    })();
     return matchesSearch && matchesRole && matchesLocation && matchesSkill && matchesExperience;
   });
 
@@ -121,9 +128,11 @@ export default function Careers() {
     setExperience('');
     setSkills('');
     setPanNumber('');
+    setLinkedin('');
     setResume(null);
     setIsSuccess(false);
     setSelectedJob(null);
+    setShowGeneralForm(false);
   };
 
   if (viewJob) {
@@ -160,8 +169,17 @@ export default function Careers() {
             </span>
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg">
-            At IVA Work Solutions, we nurture creativity, celebrate diverse talent, and provide a platform where your work delivers direct value to modern global enterprises. Explore active openings or apply directly below.
+            At IVA Work Solutions, we nurture creativity, celebrate diverse talent, and provide a platform where your work delivers direct value to modern global enterprises. Explore active openings or submit a general application.
           </p>
+          <div className="mt-8">
+            <button
+              onClick={() => setShowGeneralForm(true)}
+              className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-[#5EE3B7] to-[#00BFEF] px-6 py-3.5 text-sm font-extrabold text-slate-950 shadow-md transition-all hover:scale-[1.02] hover:shadow-lg"
+            >
+              <Send className="h-4 w-4" />
+              Submit General Application
+            </button>
+          </div>
         </div>
       </section>
 
@@ -192,15 +210,15 @@ export default function Careers() {
               { label: 'Role', value: filterRole, setter: setFilterRole, options: uniqueRoles },
               { label: 'Location', value: filterLocation, setter: setFilterLocation, options: uniqueLocations },
               { label: 'Skills', value: filterSkill, setter: setFilterSkill, options: uniqueSkills },
-              { label: 'Experience', value: filterExperience, setter: setFilterExperience, options: uniqueExperience },
-            ].map(({ label, value, setter, options }) => (
+              { label: 'Experience', value: filterExperience, setter: setFilterExperience, options: experienceOptions },
+            ].map(({ label, value, setter, options }: { label: string; value: string; setter: (v: string) => void; options: string[] }) => (
               <div key={label} className="relative shrink-0">
                 <select
                   value={value}
                   onChange={e => setter(e.target.value)}
                   className="appearance-none rounded-xl border border-slate-200 bg-white px-3 py-2.5 pr-8 text-xs text-slate-700 outline-none focus:border-[#5EE3B7] focus:ring-4 focus:ring-[#5EE3B7]/10 transition-all cursor-pointer"
                 >
-                  <option value="">All {label}s</option>
+                  <option value="">All {label === 'Skills' ? 'Skills' : `${label}s`}</option>
                   {options.map(opt => <option key={opt} value={opt}>{opt}</option>)}
                 </select>
                 <ChevronDown className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 h-3 w-3 text-slate-400" />
@@ -320,160 +338,171 @@ export default function Careers() {
         </div>
       </section>
 
-      {/* Application Form */}
-      <section id="apply-form-section" className="mx-auto max-w-4xl px-4 pt-20 sm:px-6 lg:px-8">
-        <div className="relative overflow-hidden rounded-3xl border border-slate-100 bg-white p-6 shadow-sm sm:p-10">
-          <div className="absolute left-0 top-0 h-1 w-full bg-gradient-to-r from-[#5EE3B7] to-[#00BFEF]"></div>
+      {/* General Application Modal */}
+      {showGeneralForm && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setShowGeneralForm(false)} />
+          <div className="relative z-10 w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl border border-slate-100 bg-white shadow-2xl">
+            <div className="absolute left-0 top-0 h-1 w-full rounded-t-3xl bg-gradient-to-r from-[#5EE3B7] to-[#00BFEF]" />
+            <button
+              onClick={() => setShowGeneralForm(false)}
+              className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 hover:text-slate-800 transition-colors z-10"
+            >
+              <X className="h-4 w-4" />
+            </button>
 
-          {isSuccess ? (
-            <div className="space-y-6 py-12 text-center">
-              <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full border border-emerald-200 bg-emerald-50 text-emerald-500">
-                <CheckCircle2 className="h-10 w-10" />
-              </div>
-              <div className="space-y-2">
-                <h3 className="text-3xl font-extrabold text-slate-950">Application Submitted!</h3>
-                <p className="mx-auto max-w-md text-sm leading-relaxed text-slate-600">
-                  Thank you for applying to IVA Work Solutions. Our talent acquisition specialist will review your profile and reach out within 3-5 business days.
-                </p>
-              </div>
-              <button
-                onClick={resetForm}
-                className="rounded-xl bg-slate-950 px-6 py-3 text-xs font-bold text-white shadow-sm transition-all hover:bg-slate-800"
-              >
-                Submit Another Application
-              </button>
-            </div>
-          ) : (
-            <form onSubmit={handleFormSubmit} className="space-y-8">
-              <div className="border-b border-slate-100 pb-6">
-                <span className="text-xs font-bold uppercase tracking-widest text-[#5EE3B7]">Talent Intake Form</span>
-                <h3 className="mt-1 text-2xl font-extrabold text-slate-950">
-                  Submit Your Profile / General Application
-                </h3>
-                <p className="mt-1 text-xs text-slate-500">Complete the required details and upload your latest curriculum vitae.</p>
-              </div>
-
-              {errors.form && (
-                <div className="flex items-center gap-3 rounded-xl border border-red-200 bg-red-50 p-4 text-xs text-red-600">
-                  <AlertCircle className="h-5 w-5 shrink-0" />
-                  <span>{errors.form}</span>
+            <div className="p-6 sm:p-8">
+              {isSuccess ? (
+                <div className="space-y-6 py-10 text-center">
+                  <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full border border-emerald-200 bg-emerald-50 text-emerald-500">
+                    <CheckCircle2 className="h-10 w-10" />
+                  </div>
+                  <div className="space-y-2">
+                    <h3 className="text-2xl font-extrabold text-slate-950">Application Submitted!</h3>
+                    <p className="mx-auto max-w-md text-sm leading-relaxed text-slate-600">
+                      Thank you for applying to IVA Work Solutions. Our talent acquisition specialist will review your profile and reach out within 3-5 business days.
+                    </p>
+                  </div>
+                  <button onClick={resetForm} className="rounded-xl bg-slate-950 px-6 py-3 text-xs font-bold text-white shadow-sm transition-all hover:bg-slate-800">
+                    Submit Another Application
+                  </button>
                 </div>
+              ) : (
+                <form onSubmit={handleFormSubmit} className="space-y-6">
+                  <div className="border-b border-slate-100 pb-4 pr-8">
+                    <span className="text-xs font-bold uppercase tracking-widest text-[#5EE3B7]">Talent Intake Form</span>
+                    <h3 className="mt-1 text-xl font-extrabold text-slate-950">Submit Your Profile / General Application</h3>
+                    <p className="mt-1 text-xs text-slate-500">Complete the required details and upload your latest curriculum vitae.</p>
+                  </div>
+
+                  {errors.form && (
+                    <div className="flex items-center gap-3 rounded-xl border border-red-200 bg-red-50 p-4 text-xs text-red-600">
+                      <AlertCircle className="h-5 w-5 shrink-0" />
+                      <span>{errors.form}</span>
+                    </div>
+                  )}
+
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                    <div className="space-y-1.5">
+                      <label className="text-[10px] font-bold uppercase tracking-wider text-slate-700">Full Name *</label>
+                      <input type="text" value={fullName} onChange={(e) => setFullName(e.target.value)} placeholder="Enter your full legal name" className={fieldClass(!!errors.fullName)} />
+                      {errors.fullName && <span className="block text-[10px] font-medium text-red-500">{errors.fullName}</span>}
+                    </div>
+                    <div className="space-y-1.5">
+                      <label className="text-[10px] font-bold uppercase tracking-wider text-slate-700">Role</label>
+                      <input type="text" value={role} onChange={(e) => setRole(e.target.value)} placeholder="e.g. Senior Business Analyst" className={fieldClass()} />
+                    </div>
+                    <div className="space-y-1.5">
+                      <label className="text-[10px] font-bold uppercase tracking-wider text-slate-700">Email Address *</label>
+                      <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="yourname@domain.com" className={fieldClass(!!errors.email)} />
+                      {errors.email && <span className="block text-[10px] font-medium text-red-500">{errors.email}</span>}
+                    </div>
+                    <div className="space-y-1.5">
+                      <label className="text-[10px] font-bold uppercase tracking-wider text-slate-700">Phone Number *</label>
+                      <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+91 00000 00000" className={fieldClass(!!errors.phone)} />
+                      {errors.phone && <span className="block text-[10px] font-medium text-red-500">{errors.phone}</span>}
+                    </div>
+                    <div className="space-y-1.5">
+                      <label className="text-[10px] font-bold uppercase tracking-wider text-slate-700">PAN Number *</label>
+                      <input type="text" value={panNumber} onChange={(e) => setPanNumber(e.target.value.toUpperCase())} placeholder="e.g. ABCDE1234F" maxLength={10} className={fieldClass(!!errors.panNumber)} />
+                      {errors.panNumber && <span className="block text-[10px] font-medium text-red-500">{errors.panNumber}</span>}
+                    </div>
+                    <div className="space-y-1.5">
+                      <label className="text-[10px] font-bold uppercase tracking-wider text-slate-700">Address *</label>
+                      <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} placeholder="City, State, Zip Code" className={fieldClass(!!errors.address)} />
+                      {errors.address && <span className="block text-[10px] font-medium text-red-500">{errors.address}</span>}
+                    </div>
+                    <div className="space-y-1.5">
+                      <label className="text-[10px] font-bold uppercase tracking-wider text-slate-700">Highest Qualification *</label>
+                      <div className="relative">
+                        <GraduationCap className="absolute left-3.5 top-3.5 h-4 w-4 text-slate-400" />
+                        <select value={qualification} onChange={(e) => setQualification(e.target.value)} className={`${fieldClass(!!errors.qualification)} pl-10`}>
+                          <option value="">Select Qualification</option>
+                          <option value="Associate's Degree">Associate's Degree</option>
+                          <option value="Bachelor's Degree">Bachelor's Degree</option>
+                          <option value="Master's Degree">Master's Degree</option>
+                          <option value="Doctorate">Doctorate</option>
+                          <option value="High School Diploma">High School Diploma</option>
+                        </select>
+                      </div>
+                      {errors.qualification && <span className="block text-[10px] font-medium text-red-500">{errors.qualification}</span>}
+                    </div>
+                    <div className="space-y-1.5">
+                      <label className="text-[10px] font-bold uppercase tracking-wider text-slate-700">Professional Experience *</label>
+                      <div className="relative">
+                        <Clock className="absolute left-3.5 top-3.5 h-4 w-4 text-slate-400" />
+                        <select value={experience} onChange={(e) => setExperience(e.target.value)} className={`${fieldClass(!!errors.experience)} pl-10`}>
+                          <option value="">Select Experience Level</option>
+                          <option value="Fresh / Entry-level">Fresh / Entry-level</option>
+                          <option value="1-2 Years">1-2 Years</option>
+                          <option value="3-5 Years">3-5 Years</option>
+                          <option value="5+ Years">5+ Years</option>
+                        </select>
+                      </div>
+                      {errors.experience && <span className="block text-[10px] font-medium text-red-500">{errors.experience}</span>}
+                    </div>
+                    <div className="space-y-1.5">
+                      <label className="text-[10px] font-bold uppercase tracking-wider text-slate-700">Notice Period</label>
+                      <div className="relative">
+                        <Clock className="absolute left-3.5 top-3.5 h-4 w-4 text-slate-400" />
+                        <select value={noticePeriod} onChange={(e) => setNoticePeriod(e.target.value)} className={`${fieldClass()} pl-10`}>
+                          <option value="">Select Notice Period</option>
+                          <option>Immediately Available</option>
+                          <option>1 Week</option>
+                          <option>2 Weeks</option>
+                          <option>1 Month</option>
+                          <option>2 Months</option>
+                          <option>3 Months</option>
+                          <option>More than 3 Months</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="text-[10px] font-bold uppercase tracking-wider text-slate-700">Professional Skills (Comma Separated) *</label>
+                    <div className="relative">
+                      <Zap className="absolute left-3.5 top-3.5 h-4 w-4 text-slate-400" />
+                      <textarea rows={3} value={skills} onChange={(e) => setSkills(e.target.value)} placeholder="e.g. React.js, Excel Strategy Modeling, Lean Process Mapping, Agile, Salesforce" className={`${fieldClass(!!errors.skills)} pl-10`} />
+                    </div>
+                    {errors.skills && <span className="block text-[10px] font-medium text-red-500">{errors.skills}</span>}
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="text-[10px] font-bold uppercase tracking-wider text-slate-700">LinkedIn Profile URL</label>
+                    <input type="url" value={linkedin} onChange={(e) => setLinkedin(e.target.value)} placeholder="https://linkedin.com/in/yourprofile" className={fieldClass()} />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-bold uppercase tracking-wider text-slate-700">Upload Resume (PDF, DOCX) *</label>
+                    <div className={`rounded-2xl border-2 border-dashed p-5 text-center transition-all ${errors.resume ? 'border-red-300 bg-red-50/50' : 'border-slate-200 bg-slate-50 hover:border-[#5EE3B7]'}`}>
+                      <input type="file" id="resume-file" accept=".pdf,.docx,.doc" onChange={handleFileChange} className="hidden" />
+                      <label htmlFor="resume-file" className="block cursor-pointer space-y-1.5">
+                        <FileText className="mx-auto h-7 w-7 text-slate-400" />
+                        <span className="block text-xs font-bold text-slate-700">{resume ? resume.name : 'Click to Upload Resume'}</span>
+                        <span className="block text-[10px] text-slate-400">PDF, DOCX — max 10MB</span>
+                      </label>
+                    </div>
+                    {errors.resume && <span className="block text-[10px] font-medium text-red-500">{errors.resume}</span>}
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#5EE3B7] to-[#00BFEF] py-4 text-xs font-extrabold text-white shadow-md transition-all hover:scale-[1.01] hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-70"
+                  >
+                    {isSubmitting ? (
+                      <><div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" /><span>Processing Submission...</span></>
+                    ) : (
+                      <><Send className="h-4 w-4" /><span>Submit Application</span></>
+                    )}
+                  </button>
+                </form>
               )}
-
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <div className="space-y-1.5">
-                  <label className="text-[10px] font-bold uppercase tracking-wider text-slate-700">Full Name *</label>
-                  <input type="text" value={fullName} onChange={(e) => setFullName(e.target.value)} placeholder="Enter your full legal name" className={fieldClass(!!errors.fullName)} />
-                  {errors.fullName && <span className="block text-[10px] font-medium text-red-500">{errors.fullName}</span>}
-                </div>
-                <div className="space-y-1.5">
-                  <label className="text-[10px] font-bold uppercase tracking-wider text-slate-700">Role</label>
-                  <input type="text" value={role} onChange={(e) => setRole(e.target.value)} placeholder="e.g. Senior Business Analyst" className={fieldClass()} />
-                </div>
-                <div className="space-y-1.5">
-                  <label className="text-[10px] font-bold uppercase tracking-wider text-slate-700">Email Address *</label>
-                  <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="yourname@domain.com" className={fieldClass(!!errors.email)} />
-                  {errors.email && <span className="block text-[10px] font-medium text-red-500">{errors.email}</span>}
-                </div>
-                <div className="space-y-1.5">
-                  <label className="text-[10px] font-bold uppercase tracking-wider text-slate-700">Phone Number *</label>
-                  <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+1 (555) 000-0000" className={fieldClass(!!errors.phone)} />
-                  {errors.phone && <span className="block text-[10px] font-medium text-red-500">{errors.phone}</span>}
-                </div>
-                <div className="space-y-1.5">
-                  <label className="text-[10px] font-bold uppercase tracking-wider text-slate-700">PAN Number *</label>
-                  <input type="text" value={panNumber} onChange={(e) => setPanNumber(e.target.value.toUpperCase())} placeholder="e.g. ABCDE1234F" maxLength={10} className={fieldClass(!!errors.panNumber)} />
-                  {errors.panNumber && <span className="block text-[10px] font-medium text-red-500">{errors.panNumber}</span>}
-                </div>
-                <div className="space-y-1.5">
-                  <label className="text-[10px] font-bold uppercase tracking-wider text-slate-700">Address *</label>
-                  <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} placeholder="City, State, Zip Code" className={fieldClass(!!errors.address)} />
-                  {errors.address && <span className="block text-[10px] font-medium text-red-500">{errors.address}</span>}
-                </div>
-                <div className="space-y-1.5">
-                  <label className="text-[10px] font-bold uppercase tracking-wider text-slate-700">Highest Qualification *</label>
-                  <div className="relative">
-                    <GraduationCap className="absolute left-3.5 top-3.5 h-4 w-4 text-slate-400" />
-                    <select value={qualification} onChange={(e) => setQualification(e.target.value)} className={`${fieldClass(!!errors.qualification)} pl-10`}>
-                      <option value="">Select Qualification</option>
-                      <option value="Associate's Degree">Associate's Degree</option>
-                      <option value="Bachelor's Degree">Bachelor's Degree</option>
-                      <option value="Master's Degree">Master's Degree</option>
-                      <option value="Doctorate">Doctorate</option>
-                      <option value="High School Diploma">High School Diploma</option>
-                    </select>
-                  </div>
-                  {errors.qualification && <span className="block text-[10px] font-medium text-red-500">{errors.qualification}</span>}
-                </div>
-                <div className="space-y-1.5">
-                  <label className="text-[10px] font-bold uppercase tracking-wider text-slate-700">Professional Experience *</label>
-                  <div className="relative">
-                    <Clock className="absolute left-3.5 top-3.5 h-4 w-4 text-slate-400" />
-                    <select value={experience} onChange={(e) => setExperience(e.target.value)} className={`${fieldClass(!!errors.experience)} pl-10`}>
-                      <option value="">Select Experience Level</option>
-                      <option value="Fresh / Entry-level">Fresh / Entry-level</option>
-                      <option value="1-2 Years">1-2 Years</option>
-                      <option value="3-5 Years">3-5 Years</option>
-                      <option value="5+ Years">5+ Years</option>
-                    </select>
-                  </div>
-                  {errors.experience && <span className="block text-[10px] font-medium text-red-500">{errors.experience}</span>}
-                </div>
-                <div className="space-y-1.5">
-                  <label className="text-[10px] font-bold uppercase tracking-wider text-slate-700">Notice Period</label>
-                  <div className="relative">
-                    <Clock className="absolute left-3.5 top-3.5 h-4 w-4 text-slate-400" />
-                    <select value={noticePeriod} onChange={(e) => setNoticePeriod(e.target.value)} className={`${fieldClass()} pl-10`}>
-                      <option value="">Select Notice Period</option>
-                      <option>Immediately Available</option>
-                      <option>1 Week</option>
-                      <option>2 Weeks</option>
-                      <option>1 Month</option>
-                      <option>2 Months</option>
-                      <option>3 Months</option>
-                      <option>More than 3 Months</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-
-              <div className="space-y-1.5">
-                <label className="text-[10px] font-bold uppercase tracking-wider text-slate-700">Professional Skills (Comma Separated) *</label>
-                <div className="relative">
-                  <Zap className="absolute left-3.5 top-3.5 h-4 w-4 text-slate-400" />
-                  <textarea rows={3} value={skills} onChange={(e) => setSkills(e.target.value)} placeholder="e.g. React.js, Excel Strategy Modeling, Lean Process Mapping, Agile, Salesforce" className={`${fieldClass(!!errors.skills)} pl-10`} />
-                </div>
-                {errors.skills && <span className="block text-[10px] font-medium text-red-500">{errors.skills}</span>}
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-[10px] font-bold uppercase tracking-wider text-slate-700">Upload Resume (PDF, DOCX) *</label>
-                <div className={`rounded-2xl border-2 border-dashed p-6 text-center transition-all ${errors.resume ? 'border-red-300 bg-red-50/50' : 'border-slate-200 bg-slate-50 hover:border-[#5EE3B7]'}`}>
-                  <input type="file" id="resume-file" accept=".pdf,.docx,.doc" onChange={handleFileChange} className="hidden" />
-                  <label htmlFor="resume-file" className="block cursor-pointer space-y-2">
-                    <FileText className="mx-auto h-8 w-8 text-slate-400" />
-                    <span className="block text-xs font-bold text-slate-700">{resume ? resume.name : 'Click to Upload Resume'}</span>
-                    <span className="block text-[10px] text-slate-400">PDF, DOCX max 10MB</span>
-                  </label>
-                </div>
-                {errors.resume && <span className="block text-[10px] font-medium text-red-500">{errors.resume}</span>}
-              </div>
-
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#5EE3B7] to-[#00BFEF] py-4 text-xs font-extrabold text-white shadow-md transition-all hover:scale-[1.01] hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-70"
-              >
-                {isSubmitting ? (
-                  <><div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></div><span>Processing Submission...</span></>
-                ) : (
-                  <><Send className="h-4 w-4" /><span>Submit Application</span></>
-                )}
-              </button>
-            </form>
-          )}
+            </div>
+          </div>
         </div>
-      </section>
+      )}
 
       {applyModalJob && <ApplyModal job={applyModalJob} onClose={() => setApplyModalJob(null)} />}
     </div>

@@ -38,9 +38,13 @@ export default function App() {
   // UI state
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [showNotification, setShowNotification] = useState(true);
+  const [careersKey, setCareersKey] = useState(0);
+  const [blogKey, setBlogKey] = useState(0);
 
   const navigateTo = (page: Page) => {
     setCurrentPage(page);
+    if (page === 'careers') setCareersKey(k => k + 1);
+    if (page === 'blog') setBlogKey(k => k + 1);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -135,9 +139,9 @@ export default function App() {
           />
         );
       case 'careers':
-        return <Careers />;
+        return <Careers key={careersKey} />;
       case 'blog':
-        return <Blog />;
+        return <Blog key={blogKey} />;
       case 'contact':
         return <Contact />;
       case 'admin':

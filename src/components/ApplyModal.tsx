@@ -26,6 +26,7 @@ export default function ApplyModal({ job, onClose }: Props) {
   const [skills, setSkills] = useState('');
   const [panNumber, setPanNumber] = useState('');
   const [noticePeriod, setNoticePeriod] = useState('');
+  const [linkedin, setLinkedin] = useState('');
   const [declaration, setDeclaration] = useState(false);
   const [resume, setResume] = useState<File | null>(null);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
@@ -120,6 +121,10 @@ export default function ApplyModal({ job, onClose }: Props) {
               )}
 
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <div className="space-y-1.5 sm:col-span-2">
+                  <label className="text-[10px] font-bold uppercase tracking-wider text-slate-700">Applying For</label>
+                  <input type="text" value={job.title} readOnly className="w-full rounded-xl border border-slate-200 bg-slate-100 px-4 py-3 text-xs font-semibold text-slate-700 outline-none cursor-default" />
+                </div>
                 <div className="space-y-1.5">
                   <label className="text-[10px] font-bold uppercase tracking-wider text-slate-700">Full Name *</label>
                   <input type="text" value={fullName} onChange={e => setFullName(e.target.value)} placeholder="Enter your full legal name" className={fieldClass(!!errors.fullName)} />
@@ -190,6 +195,11 @@ export default function ApplyModal({ job, onClose }: Props) {
                     </select>
                   </div>
                 </div>
+              </div>
+
+              <div className="space-y-1.5">
+                <label className="text-[10px] font-bold uppercase tracking-wider text-slate-700">LinkedIn Profile URL</label>
+                <input type="url" value={linkedin} onChange={e => setLinkedin(e.target.value)} placeholder="https://linkedin.com/in/yourprofile" className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-xs text-slate-800 outline-none transition-all placeholder:text-slate-400 focus:border-[#5EE3B7] focus:bg-white focus:ring-4 focus:ring-[#5EE3B7]/10" />
               </div>
 
               <div className="space-y-2">
