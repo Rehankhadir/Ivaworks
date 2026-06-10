@@ -226,7 +226,7 @@ export default function ApplyModal({ job, onClose }: Props) {
                   />
                   <span className="text-xs leading-relaxed">
                     I agree to the processing of my personal data for the purpose of this application.{' '}
-                    <a href="/privacy-policy" className="font-semibold text-[#00BFEF] underline underline-offset-2 hover:text-[#5EE3B7] transition-colors">
+                    <a href="#privacy-policy" className="font-semibold text-[#00BFEF] underline underline-offset-2 hover:text-[#5EE3B7] transition-colors">
                       View Our Privacy Policy
                     </a>
                   </span>
