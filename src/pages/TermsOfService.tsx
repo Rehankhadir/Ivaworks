@@ -111,7 +111,7 @@ export default function TermsOfService({ setCurrentPage }: Props) {
 
             <Section id="services" title="Services">
               <p>IVA Work Solutions provides a range of professional consulting, staffing &amp; recruitment, and technology services designed to support organizations in achieving their business objectives. Our services may include, but are not limited to:</p>
-              <ul className="mt-4 space-y-2 text-sm text-slate-600">
+              <ul className="mt-4 space-y-2 text-sm text-slate-600 list-disc list-inside">
                 <li>Staffing and permanent recruitment solutions</li>
                 <li>Contract and temporary workforce placement</li>
                 <li>Workforce management and HR consulting</li>
@@ -123,7 +123,7 @@ export default function TermsOfService({ setCurrentPage }: Props) {
 
             <Section id="eligibility" title="Eligibility">
               <p>Access to and use of the IVA Work Solutions website and services are available only to individuals and entities that meet the applicable eligibility requirements. By accessing the website, submitting information, applying for opportunities, or engaging our services, you represent and warrant that:</p>
-              <ul className="mt-4 space-y-2 text-sm text-slate-600">
+              <ul className="mt-4 space-y-2 text-sm text-slate-600 list-disc list-inside">
                 <li>You must be at least 18 years of age</li>
                 <li>You must be legally capable of entering into binding agreements</li>
                 <li>Your use must comply with all applicable local, national, and international laws</li>
@@ -132,7 +132,7 @@ export default function TermsOfService({ setCurrentPage }: Props) {
 
             <Section id="user-responsibilities" title="User Responsibilities">
               <p>By using our website and services, you agree to:</p>
-              <ul className="mt-4 space-y-2 text-sm text-slate-600">
+              <ul className="mt-4 space-y-2 text-sm text-slate-600 list-disc list-inside">
                 <li>Provide accurate, current, and complete information at all times</li>
                 <li>Not misuse the website or attempt unauthorised access</li>
                 <li>Not distribute malware, viruses, or harmful software</li>

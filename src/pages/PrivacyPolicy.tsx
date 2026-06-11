@@ -111,7 +111,7 @@ export default function PrivacyPolicy({ setCurrentPage }: Props) {
 
             <Section id="information-collect" title="Information We Collect">
               <p>We collect a range of personal and professional information to deliver our services effectively.</p>
-              <ul className="mt-4 space-y-2 text-sm text-slate-600">
+              <ul className="mt-4 space-y-2 text-sm text-slate-600 list-disc list-inside">
                 <li><span className="font-semibold text-slate-800">Personal details</span> — name, address, date of birth, and government-issued ID information</li>
                 <li><span className="font-semibold text-slate-800">Contact information</span> — email address, phone number, and postal address</li>
                 <li><span className="font-semibold text-slate-800">Employment history</span> — previous employers, roles, duration, and references</li>
@@ -143,7 +143,7 @@ export default function PrivacyPolicy({ setCurrentPage }: Props) {
 
             <Section id="information-sharing" title="Information Sharing">
               <p>We do not sell your personal information to third parties. Information may be shared only with:</p>
-              <ul className="mt-4 space-y-2 text-sm text-slate-600">
+              <ul className="mt-4 space-y-2 text-sm text-slate-600 list-disc list-inside">
                 <li>Client companies for recruitment and placement purposes</li>
                 <li>Authorized recruitment partners and staffing agencies</li>
                 <li>Technology vendors and service providers supporting our operations</li>
@@ -157,7 +157,7 @@ export default function PrivacyPolicy({ setCurrentPage }: Props) {
 
             <Section id="data-security" title="Data Security Measures">
               <p>We are committed to protecting the security and confidentiality of your personal information. We implement appropriate technical, administrative, and organisational safeguards designed to protect personal data against unauthorised access, disclosure, alteration, misuse, loss, or destruction.</p>
-              <ul className="mt-4 space-y-2 text-sm text-slate-600">
+              <ul className="mt-4 space-y-2 text-sm text-slate-600 list-disc list-inside">
                 <li>Encryption of data during transmission and, where applicable, at rest.</li>
                 <li>Role-based access controls to ensure that only authorised personnel can access personal information.</li>
                 <li>Secure hosting environments and network security protections.</li>
@@ -172,7 +172,7 @@ export default function PrivacyPolicy({ setCurrentPage }: Props) {
 
             <Section id="privacy-rights" title="Your Privacy Rights">
               <p>Depending on your location and applicable data protection laws, you may have certain rights regarding the personal information we collect and process. These rights may include:</p>
-              <ul className="mt-4 space-y-2 text-sm text-slate-600">
+              <ul className="mt-4 space-y-2 text-sm text-slate-600 list-disc list-inside">
                 <li><span className="font-semibold text-slate-800">Right of Access</span> – Request access to the personal information we hold about you and obtain a copy of that information.</li>
                 <li><span className="font-semibold text-slate-800">Right to Rectification</span> – Request correction of any inaccurate, incomplete, or outdated personal data.</li>
                 <li><span className="font-semibold text-slate-800">Right to Erasure</span> – Request the deletion of your personal information in certain circumstances, commonly referred to as the "right to be forgotten."</li>
