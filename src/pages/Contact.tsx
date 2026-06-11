@@ -111,7 +111,7 @@ export default function Contact() {
 
             <div className="space-y-4">
               {[
-                { icon: <MapPin className="h-5 w-5 text-[#5EE3B7]" />, title: 'Corporate Headquarters', content: <>WorkFlo Hitex Bizness Square, 4th Floor<br />Madhapur, Hyderabad, Telangana - 500081</> },
+                { icon: <MapPin className="h-5 w-5 text-[#5EE3B7]" />, title: 'Corporate Headquarters', content: <>WorkFlo Hitex Bizness Square, 4th Floor<br />Opp. Hitex Road, Hitech City<br />Hyderabad, Telangana - 500081</> },
                 { icon: <Phone className="h-5 w-5 text-[#00BFEF]" />, title: 'Direct Support Phone', content: <><a href="tel:+917075550125" className="font-semibold text-slate-700 hover:text-slate-950">+91 70755 50125</a><br />Available Mon-Fri, 9:00 AM - 6:00 PM EST</> },
                 { icon: <Mail className="h-5 w-5 text-[#5EE3B7]" />, title: 'Direct Coordinator Email', content: <><a href="mailto:info@ivaworksolutions.com" className="font-semibold text-slate-700 hover:text-slate-950">info@ivaworksolutions.com</a><br />Inquiries reviewed within 1 business day</> }
               ].map((item) => (

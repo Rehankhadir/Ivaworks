@@ -77,8 +77,8 @@ export default function Footer({ setCurrentPage }: FooterProps) {
                 <MapPin className="h-5 w-5 text-[#5EE3B7] shrink-0 mt-0.5" />
                 <span>
                   WorkFlo Hitex Bizness Square, 4th Floor<br />
-                  Madhapur, Hyderabad<br />
-                  Telangana - 500081
+                  Opp. Hitex Road, Hitech City<br />
+                  Hyderabad, Telangana - 500081
                 </span>
               </li>
               <li className="flex items-center space-x-3">
