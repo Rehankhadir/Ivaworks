@@ -99,9 +99,12 @@ export default function Footer({ setCurrentPage }: FooterProps) {
           <div>
             &copy; {currentYear} IVA Work Solutions. All rights reserved. 
           </div>
-          <div className="flex space-x-6">
+          <div className="flex flex-wrap justify-center sm:justify-end gap-x-6 gap-y-2">
             <button onClick={() => setCurrentPage('privacy-policy')} className="hover:text-slate-400 hover:underline flex items-center space-x-1">
               <span>Privacy Policy</span>
+            </button>
+            <button onClick={() => setCurrentPage('cookie-policy')} className="hover:text-slate-400 hover:underline flex items-center space-x-1">
+              <span>Cookie Policy</span>
             </button>
             <button onClick={() => setCurrentPage('terms-of-service')} className="hover:text-slate-400 hover:underline flex items-center space-x-1">
               <span>Terms of Service</span>

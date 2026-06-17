@@ -11,6 +11,7 @@ import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
+import CookiePolicy from './pages/CookiePolicy';
 import { useAdminAuth } from './hooks/useDataStore';
 import { Page } from './types';
 import { ArrowUp, Sparkles, X, ChevronRight } from 'lucide-react';
@@ -22,7 +23,7 @@ const WhatsAppIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-const validPages: Page[] = ['home', 'about', 'services', 'consulting-services', 'staffing-solutions', 'technology-services', 'careers', 'blog', 'contact', 'admin', 'privacy-policy', 'terms-of-service'];
+const validPages: Page[] = ['home', 'about', 'services', 'consulting-services', 'staffing-solutions', 'technology-services', 'careers', 'blog', 'contact', 'admin', 'privacy-policy', 'terms-of-service', 'cookie-policy'];
 
 const getInitialPage = (): Page => {
   const hash = window.location.hash.replace('#', '') as Page;
@@ -150,6 +151,8 @@ export default function App() {
         return <PrivacyPolicy setCurrentPage={navigateTo} />;
       case 'terms-of-service':
         return <TermsOfService setCurrentPage={navigateTo} />;
+      case 'cookie-policy':
+        return <CookiePolicy setCurrentPage={navigateTo} />;
       case 'admin':
         return isAuthenticated
           ? <AdminDashboard onLogout={() => setCurrentPage('home')} />

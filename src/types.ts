@@ -1,4 +1,4 @@
-export type Page = 'home' | 'about' | 'services' | 'consulting-services' | 'staffing-solutions' | 'technology-services' | 'careers' | 'blog' | 'contact' | 'admin' | 'privacy-policy' | 'terms-of-service';
+export type Page = 'home' | 'about' | 'services' | 'consulting-services' | 'staffing-solutions' | 'technology-services' | 'careers' | 'blog' | 'contact' | 'admin' | 'privacy-policy' | 'terms-of-service' | 'cookie-policy';
 
 export interface SubService {
   id: string;
