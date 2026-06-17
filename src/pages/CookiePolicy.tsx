@@ -10,10 +10,6 @@ const sections = [
   { id: 'how-we-use', title: 'How We Use Cookies' },
   { id: 'third-party', title: 'Do we use any cookies from third party companies?' },
   { id: 'managing-cookies', title: 'What if I don’t want cookies or managing Cookies?' },
-  { id: 'strictly-necessary', title: 'Strictly Necessary Cookies' },
-  { id: 'analytics', title: 'Analytics Cookies' },
-  { id: 'performance-functional', title: 'Performance & Functional Cookies' },
-  { id: 'advertising-social', title: 'Advertising & Social Media Cookies' },
 ];
 
 export default function CookiePolicy({ setCurrentPage }: Props) {

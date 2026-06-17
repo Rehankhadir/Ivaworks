@@ -47,6 +47,12 @@ export default function CookieConsent({ setCurrentPage }: Props) {
   const [visible, setVisible] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [preferences, setPreferences] = useState<CookiePreferences>(defaultPreferences);
+  const [openSections, setOpenSections] = useState({
+    strictlyNecessary: true,
+    analytics: false,
+    performanceFunctional: false,
+    advertising: false,
+  });
 
   useEffect(() => {
     try {
@@ -88,6 +94,10 @@ export default function CookieConsent({ setCurrentPage }: Props) {
   const navigateTo = (page: Page) => {
     setShowSettings(false);
     setCurrentPage(page);
+  };
+
+  const toggleSection = (section: keyof typeof openSections) => {
+    setOpenSections((prev) => ({ ...prev, [section]: !prev[section] }));
   };
 
   if (!visible && !showSettings) return null;
@@ -189,7 +199,7 @@ export default function CookieConsent({ setCurrentPage }: Props) {
                 the different category headings to find out more and change our default settings. Please read
                 our{' '}
                 <button onClick={() => navigateTo('cookie-policy')} className="font-semibold text-[#00BFEF] hover:underline">
-                  Cookies Policy (Link)
+                  Cookies Policy
                 </button>{' '}
                 for more information.
               </p>
@@ -205,113 +215,175 @@ export default function CookieConsent({ setCurrentPage }: Props) {
               {/* Strictly Necessary */}
               <div className="rounded-2xl border border-slate-100 bg-slate-50 p-4">
                 <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <h3 className="text-sm font-bold text-slate-900">Strictly Necessary Cookies</h3>
-                    <span className="mt-1 inline-block text-[10px] font-bold uppercase tracking-widest text-[#00BFEF]">Always Active</span>
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => toggleSection('strictlyNecessary')}
+                      className="text-slate-700 text-lg leading-none font-bold"
+                      aria-label="Toggle Strictly Necessary Cookies"
+                    >
+                      {openSections.strictlyNecessary ? '-' : '+'}
+                    </button>
+                    <div>
+                      <h3 className="text-sm font-bold text-slate-900">Strictly Necessary Cookies</h3>
+                      <span className="mt-1 inline-block text-[10px] font-bold uppercase tracking-widest text-[#00BFEF]">Always Active</span>
+                    </div>
                   </div>
-                  <Toggle enabled={true} onChange={() => {}} disabled />
+                  <div className="flex items-center">
+                    <Toggle enabled={true} onChange={() => {}} disabled />
+                  </div>
                 </div>
-                <p className="mt-3 text-xs leading-relaxed text-slate-600">
-                  These cookies are essential in order to enable you to move around the site and use its
-                  features, such as accessing secure areas of the site. Without these cookies, services
-                  you have asked for cannot be provided.{' '}
-                  <button onClick={() => navigateTo('cookie-policy')} className="font-semibold text-[#00BFEF] hover:underline">
-                    Cookies Policy (Link)
-                  </button>
-                </p>
+                {openSections.strictlyNecessary && (
+                  <p className="mt-3 text-xs leading-relaxed text-slate-600">
+                    These cookies are essential in order to enable you to move around the site and use its
+                    features, such as accessing secure areas of the site. Without these cookies, services
+                    you have asked for cannot be provided.{' '}
+                    <button onClick={() => navigateTo('cookie-policy')} className="font-semibold text-[#00BFEF] hover:underline">
+                      Cookies Policy
+                    </button>
+                  </p>
+                )}
               </div>
 
               {/* Analytics */}
               <div className="rounded-2xl border border-slate-100 p-4">
                 <div className="flex items-start justify-between gap-4">
-                  <h3 className="text-sm font-bold text-slate-900">Analytics Cookies</h3>
-                  <Toggle
-                    enabled={preferences.analytics}
-                    onChange={(v) => setPreferences((p) => ({ ...p, analytics: v }))}
-                  />
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => toggleSection('analytics')}
+                      className="text-slate-700 text-lg leading-none font-bold"
+                      aria-label="Toggle Analytics Cookies"
+                    >
+                      {openSections.analytics ? '-' : '+'}
+                    </button>
+                    <h3 className="text-sm font-bold text-slate-900">Analytics Cookies</h3>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Toggle
+                      enabled={preferences.analytics}
+                      onChange={(v) => setPreferences((p) => ({ ...p, analytics: v }))}
+                    />
+                  </div>
                 </div>
-                <p className="mt-3 text-xs leading-relaxed text-slate-600">
-                  These cookies enable us to employ data analytics so we can measure and improve the
-                  performance of our site and to personalize and enhance your profile-based experience
-                  on our site. They help us test and deliver content that is more relevant to you by
-                  analyzing how you interact with our site, including generating insights about how
-                  different audiences engage with our content.
-                </p>
-                <p className="mt-2 text-xs leading-relaxed text-slate-600">
-                  They may collect information associated with devices, identifiers or interactions that are
-                  not intended to directly identify you as an individual but can be considered personal
-                  data under applicable privacy laws. Such data may be used in aggregate for audience-level
-                  insights, including region-based or organizational-level insights where applicable.
-                </p>
-                <p className="mt-2 text-xs leading-relaxed text-slate-600">
-                  Such data is processed by service providers acting on our behalf, including Adobe
-                  Analytics, Adobe Target (including using AI for website performance improvement),
-                  Audience Manager, Google Analytics, Leadfeeder, Contentsquare and Demandbase to
-                  provide us with analytics and insights about the use of our website and the audiences
-                  interacting with it.{' '}
-                  <button onClick={() => navigateTo('cookie-policy')} className="font-semibold text-[#00BFEF] hover:underline">
-                    Cookies Policy (Link)
-                  </button>
-                </p>
+                {openSections.analytics && (
+                  <>
+                    <p className="mt-3 text-xs leading-relaxed text-slate-600">
+                      These cookies enable us to employ data analytics so we can measure and improve the
+                      performance of our site and to personalize and enhance your profile-based experience
+                      on our site. They help us test and deliver content that is more relevant to you by
+                      analyzing how you interact with our site, including generating insights about how
+                      different audiences engage with our content.
+                    </p>
+                    <p className="mt-2 text-xs leading-relaxed text-slate-600">
+                      They may collect information associated with devices, identifiers or interactions that are
+                      not intended to directly identify you as an individual but can be considered personal
+                      data under applicable privacy laws. Such data may be used in aggregate for audience-level
+                      insights, including region-based or organizational-level insights where applicable.
+                    </p>
+                    <p className="mt-2 text-xs leading-relaxed text-slate-600">
+                      Such data is processed by service providers acting on our behalf, including Adobe
+                      Analytics, Adobe Target (including using AI for website performance improvement),
+                      Audience Manager, Google Analytics, Leadfeeder, Contentsquare and Demandbase to
+                      provide us with analytics and insights about the use of our website and the audiences
+                      interacting with it.{' '}
+                      <button onClick={() => navigateTo('cookie-policy')} className="font-semibold text-[#00BFEF] hover:underline">
+                        Cookies Policy
+                      </button>
+                    </p>
+                  </>
+                )}
               </div>
 
               {/* Performance & Functional */}
               <div className="rounded-2xl border border-slate-100 p-4">
                 <div className="flex items-start justify-between gap-4">
-                  <h3 className="text-sm font-bold text-slate-900">Performance &amp; Functional Cookies</h3>
-                  <Toggle
-                    enabled={preferences.performanceFunctional}
-                    onChange={(v) => setPreferences((p) => ({ ...p, performanceFunctional: v }))}
-                  />
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => toggleSection('performanceFunctional')}
+                      className="text-slate-700 text-lg leading-none font-bold"
+                      aria-label="Toggle Performance and Functional Cookies"
+                    >
+                      {openSections.performanceFunctional ? '-' : '+'}
+                    </button>
+                    <h3 className="text-sm font-bold text-slate-900">Performance &amp; Functional Cookies</h3>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Toggle
+                      enabled={preferences.performanceFunctional}
+                      onChange={(v) => setPreferences((p) => ({ ...p, performanceFunctional: v }))}
+                    />
+                  </div>
                 </div>
-                <p className="mt-3 text-xs leading-relaxed text-slate-600">
-                  Performance cookies are generally third-party cookies from vendors we work with or
-                  who work on our behalf that collect information about your visit and use of the
-                  IVA Work Solutions website, for instance which pages you visit the most often, and if
-                  you get error messages from web pages. These cookies do not collect information that
-                  identifies a visitor. All information these cookies collect is anonymous and is only used
-                  to improve how the website works. Third party vendors may have access to this data and
-                  may use it to improve their overall services and offerings.
-                </p>
-                <p className="mt-2 text-xs leading-relaxed text-slate-600">
-                  Functionality cookies allow a site to remember choices you make (such as your
-                  username, language or the region you are in) and provide more enhanced, personal
-                  features. These cookies cannot track your browsing activity on other websites. They do
-                  not gather any information about you that could be used for advertising or remembering
-                  where you have been on the Internet outside our site.{' '}
-                  <button onClick={() => navigateTo('cookie-policy')} className="font-semibold text-[#00BFEF] hover:underline">
-                    Cookies Policy (Link)
-                  </button>
-                </p>
+                {openSections.performanceFunctional && (
+                  <>
+                    <p className="mt-3 text-xs leading-relaxed text-slate-600">
+                      Performance cookies are generally third-party cookies from vendors we work with or
+                      who work on our behalf that collect information about your visit and use of the
+                      IVA Work Solutions website, for instance which pages you visit the most often, and if
+                      you get error messages from web pages. These cookies do not collect information that
+                      identifies a visitor. All information these cookies collect is anonymous and is only used
+                      to improve how the website works. Third party vendors may have access to this data and
+                      may use it to improve their overall services and offerings.
+                    </p>
+                    <p className="mt-2 text-xs leading-relaxed text-slate-600">
+                      Functionality cookies allow a site to remember choices you make (such as your
+                      username, language or the region you are in) and provide more enhanced, personal
+                      features. These cookies cannot track your browsing activity on other websites. They do
+                      not gather any information about you that could be used for advertising or remembering
+                      where you have been on the Internet outside our site.{' '}
+                      <button onClick={() => navigateTo('cookie-policy')} className="font-semibold text-[#00BFEF] hover:underline">
+                        Cookies Policy
+                      </button>
+                    </p>
+                  </>
+                )}
               </div>
 
               {/* Advertising & Social Media */}
               <div className="rounded-2xl border border-slate-100 p-4">
                 <div className="flex items-start justify-between gap-4">
-                  <h3 className="text-sm font-bold text-slate-900">Advertising &amp; Social Media Cookies</h3>
-                  <Toggle
-                    enabled={preferences.advertising}
-                    onChange={(v) => setPreferences((p) => ({ ...p, advertising: v }))}
-                  />
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => toggleSection('advertising')}
+                      className="text-slate-700 text-lg leading-none font-bold"
+                      aria-label="Toggle Advertising and Social Media Cookies"
+                    >
+                      {openSections.advertising ? '-' : '+'}
+                    </button>
+                    <h3 className="text-sm font-bold text-slate-900">Advertising &amp; Social Media Cookies</h3>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Toggle
+                      enabled={preferences.advertising}
+                      onChange={(v) => setPreferences((p) => ({ ...p, advertising: v }))}
+                    />
+                  </div>
                 </div>
-                <p className="mt-3 text-xs leading-relaxed text-slate-600">
-                  Advertising and social media cookies (including web beacons and other tracking and
-                  storage technologies) are used to (1) deliver advertisements more relevant to you and
-                  your interests; (2) limit the number of times you see an advertisement; (3) help measure
-                  the effectiveness of the advertising campaign; (4) retargeting to IVA Work Solutions
-                  websites/information and (5) understand people's behavior after they view an
-                  advertisement.
-                </p>
-                <p className="mt-2 text-xs leading-relaxed text-slate-600">
-                  They are usually placed on behalf of advertising networks with the site operator's
-                  permission. They remember that you have visited a site and quite often they will be linked
-                  to site functionality provided by another organization. This may impact the content and
-                  messages you see on other websites you visit. If you do not allow these cookies you may
-                  not be able to use or see these sharing tools or play certain videos on our site.{' '}
-                  <button onClick={() => navigateTo('cookie-policy')} className="font-semibold text-[#00BFEF] hover:underline">
-                    Cookies Policy (Link)
-                  </button>
-                </p>
+                {openSections.advertising && (
+                  <>
+                    <p className="mt-3 text-xs leading-relaxed text-slate-600">
+                      Advertising and social media cookies (including web beacons and other tracking and
+                      storage technologies) are used to (1) deliver advertisements more relevant to you and
+                      your interests; (2) limit the number of times you see an advertisement; (3) help measure
+                      the effectiveness of the advertising campaign; (4) retargeting to IVA Work Solutions
+                      websites/information and (5) understand people's behavior after they view an
+                      advertisement.
+                    </p>
+                    <p className="mt-2 text-xs leading-relaxed text-slate-600">
+                      They are usually placed on behalf of advertising networks with the site operator's
+                      permission. They remember that you have visited a site and quite often they will be linked
+                      to site functionality provided by another organization. This may impact the content and
+                      messages you see on other websites you visit. If you do not allow these cookies you may
+                      not be able to use or see these sharing tools or play certain videos on our site.{' '}
+                      <button onClick={() => navigateTo('cookie-policy')} className="font-semibold text-[#00BFEF] hover:underline">
+                        Cookies Policy
+                      </button>
+                    </p>
+                  </>
+                )}
               </div>
             </div>
 
