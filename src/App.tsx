@@ -12,6 +12,7 @@ import AdminDashboard from './pages/AdminDashboard';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
 import CookiePolicy from './pages/CookiePolicy';
+import CookieConsent from './components/CookieConsent';
 import { useAdminAuth } from './hooks/useDataStore';
 import { Page } from './types';
 import { ArrowUp, Sparkles, X, ChevronRight } from 'lucide-react';
@@ -208,6 +209,9 @@ export default function App() {
 
       {/* Rich Corporate Footer */}
       {!isAdminRoute && <Footer setCurrentPage={navigateTo} />}
+
+      {/* Cookie Consent Banner */}
+      {!isAdminRoute && <CookieConsent setCurrentPage={navigateTo} />}
 
       {/* FLOATING ACTION UTILITIES */}
       {!isAdminRoute && <div className="fixed bottom-6 right-6 z-40 flex flex-col space-y-3 items-end">
