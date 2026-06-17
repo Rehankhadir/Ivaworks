@@ -447,36 +447,36 @@ export default function About() {
 
             {[
               {
-                year: '2020',
-                title: 'Foundation',
-                tag: 'The Beginning',
-                tagDesc: 'A bold idea to bridge talent and opportunity through structured learning.',
-                desc: 'Started with a vision to transform careers through vendor management education.',
-              },
-              {
-                year: '2022',
-                title: 'Expansion',
-                tag: 'Scaling Programs',
-                tagDesc: 'Broadened our portfolio to address rapidly evolving industry skill demands.',
-                desc: 'Added technology learning programs and expanded course offerings.',
-              },
-              {
                 year: '2024',
-                title: 'Innovation',
-                tag: 'AI-Powered Era',
-                tagDesc: 'Embraced intelligent automation to personalize learning and hiring at scale.',
-                desc: 'Launched AI-powered learning tools and career matching platform.',
+                title: 'The Idea Was Born',
+                tag: 'The Idea Was Born',
+                tagDesc: 'A vision to simplify recruitment and workforce management.',
+                desc: 'IVA Work Solutions began as a vision to simplify recruitment and workforce management. During this phase, extensive research was conducted to understand industry challenges, hiring gaps, and evolving workforce needs.',
+              },
+              {
+                year: '2025',
+                title: 'Building the Foundation',
+                tag: 'Building the Foundation',
+                tagDesc: 'Defining services and developing the operational framework.',
+                desc: 'The year was dedicated to gathering business requirements, defining service offerings, studying market demands, and developing the operational framework required to deliver high-quality recruitment and staffing solutions.',
               },
               {
                 year: '2026',
-                title: 'Growth',
-                tag: 'Trusted Globally',
-                tagDesc: 'Recognized for measurable career outcomes across global enterprise clients.',
-                desc: 'Serving 500+ professionals with 95% success rate in career advancement.',
+                title: 'Official Launch',
+                tag: 'Official Launch',
+                tagDesc: 'Registered and launched as a professional workforce solutions company.',
+                desc: 'IVA Work Solutions was officially registered and launched as a professional workforce solutions company. With a strong foundation in Consulting, Staffing & Recruitment, Technologies, the company began serving organizations across multiple industries.',
+              },
+              {
+                year: '2026',
+                title: 'Technology-Driven Growth',
+                tag: 'Technology-Driven Growth',
+                tagDesc: 'Modern recruitment practices and digital hiring solutions.',
+                desc: 'Introduced modern recruitment practices, streamlined candidate management processes, and digital hiring solutions to help businesses identify and onboard the right talent efficiently.',
               },
             ].map((node) => (
               <div
-                key={node.year}
+                key={`${node.year}-${node.title}`}
                 className="relative flex flex-col md:flex-row items-start md:items-center justify-between mb-12 last:mb-0"
               >
                 <div className="hidden md:block w-5/12 text-right pr-8">
