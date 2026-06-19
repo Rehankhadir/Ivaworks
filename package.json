@@ -1,30 +1,17 @@
 {
-  "name": "react-vite-tailwind",
+  "name": "ivaworks",
   "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "workspaces": [
+    "frontend",
+    "admin",
+    "backend"
+  ],
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "clsx": "2.1.1",
-    "lucide-react": "^1.14.0",
-    "quill": "^2.0.3",
-    "react": "19.2.3",
-    "react-dom": "19.2.3",
-    "tailwind-merge": "3.4.0"
-  },
-  "devDependencies": {
-    "@tailwindcss/vite": "4.1.17",
-    "@types/node": "22.19.17",
-    "@types/react": "19.2.7",
-    "@types/react-dom": "19.2.3",
-    "@vitejs/plugin-react": "^4.7.0",
-    "tailwindcss": "4.1.17",
-    "typescript": "5.9.3",
-    "vite": "^6.4.2",
-    "vite-plugin-singlefile": "^2.3.3"
+    "dev:frontend": "npm run dev --workspace=ivaworks-frontend",
+    "dev:admin": "npm run dev --workspace=ivaworks-admin",
+    "dev:backend": "npm run dev --workspace=ivaworks-backend",
+    "build:frontend": "npm run build --workspace=ivaworks-frontend",
+    "build:admin": "npm run build --workspace=ivaworks-admin",
+    "build": "npm run build:frontend && npm run build:admin"
   }
 }
