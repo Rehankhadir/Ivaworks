@@ -7,6 +7,7 @@
     "backend"
   ],
   "scripts": {
+    "start": "node backend/src/server.js",
     "dev:frontend": "npm run dev --workspace=ivaworks-frontend",
     "dev:admin": "npm run dev --workspace=ivaworks-admin",
     "dev:backend": "npm run dev --workspace=ivaworks-backend",

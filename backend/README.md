@@ -26,7 +26,10 @@ src/
 cp .env.example .env
 
 # 2. Create database and admin account
+# Local (XAMPP): creates database ivaworks
 mysql -u root -p < database/schema.sql
+# Hostinger / shared hosting: select your DB in phpMyAdmin, then import:
+#   database/schema.hostinger.sql
 node scripts/set-admin-password.js "YourSecurePassword"
 
 # 3. Install & run
