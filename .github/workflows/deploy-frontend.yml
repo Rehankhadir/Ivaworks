@@ -1,0 +1,47 @@
+name: Deploy Frontend to Hostinger
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'frontend/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/deploy-frontend.yml'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      VITE_API_URL: https://api.ivaworksolutions.com/api
+      VITE_ASSETS_URL: https://api.ivaworksolutions.com
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build public website
+        run: npm run build:frontend
+
+      - name: Deploy to Hostinger via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
+        with:
+          server: ${{ secrets.HOSTINGER_FTP_HOST }}
+          username: ${{ secrets.HOSTINGER_FRONTEND_FTP_USERNAME }}
+          password: ${{ secrets.HOSTINGER_FRONTEND_FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          local-dir: ./frontend/dist/
+          server-dir: ${{ secrets.HOSTINGER_FRONTEND_REMOTE_DIR }}
+          dangerous-clean-slate: true
