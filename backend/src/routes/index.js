@@ -21,15 +21,19 @@ router.use('/contact-inquiries', contactRoutes);
 router.use('/public', publicRoutes);
 
 router.get('/health', async (_req, res) => {
-  const { testConnection } = require('../config/db');
+  const { testConnection, getDbConfigSummary } = require('../config/db');
+  const config = getDbConfigSummary();
+
   try {
     await testConnection();
     res.json({ success: true, message: 'IVAWORKS API is running', database: 'connected' });
-  } catch {
+  } catch (error) {
     res.status(503).json({
       success: false,
       message: 'IVAWORKS API is running but database is unavailable',
       database: 'disconnected',
+      config,
+      error: error.message || 'Unknown database error',
     });
   }
 });

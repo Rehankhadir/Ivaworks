@@ -27,4 +27,15 @@ async function testConnection() {
   connection.release();
 }
 
-module.exports = { pool, testConnection };
+function getDbConfigSummary() {
+  const { host, port, user, database, password } = env.db;
+  return {
+    host,
+    port,
+    user: user || '(not set)',
+    database: database || '(not set)',
+    passwordSet: Boolean(password),
+  };
+}
+
+module.exports = { pool, testConnection, getDbConfigSummary };

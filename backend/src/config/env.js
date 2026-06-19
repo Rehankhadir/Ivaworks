@@ -2,22 +2,33 @@
  * Centralised environment configuration.
  * All process.env access lives here — never scatter env reads across the codebase.
  */
+const fs = require('fs');
 const path = require('path');
 
-require('dotenv').config({
-  path: path.join(__dirname, '..', '..', '.env'),
-});
+function readEnv(key) {
+  const value = process.env[key];
+  return typeof value === 'string' ? value.trim() : value;
+}
+
+const nodeEnv = readEnv('NODE_ENV') || 'development';
+const isProduction = nodeEnv === 'production';
+const envFilePath = path.join(__dirname, '..', '..', '.env');
+
+// Local dev uses backend/.env. Production (Hostinger) uses panel env vars only.
+if (!isProduction && fs.existsSync(envFilePath)) {
+  require('dotenv').config({ path: envFilePath });
+}
 
 const env = {
-  nodeEnv: process.env.NODE_ENV || 'development',
-  port: parseInt(process.env.PORT, 10) || (process.env.NODE_ENV === 'production' ? 3000 : 5000),
+  nodeEnv,
+  port: parseInt(readEnv('PORT'), 10) || (isProduction ? 3000 : 5000),
 
   db: {
-    host: process.env.DB_HOST || 'localhost',
-    port: parseInt(process.env.DB_PORT, 10) || 3306,
-    user: process.env.DB_USER || 'root',
-    password: process.env.DB_PASSWORD || '',
-    database: process.env.DB_NAME || 'ivaworks',
+    host: readEnv('DB_HOST') || 'localhost',
+    port: parseInt(readEnv('DB_PORT'), 10) || 3306,
+    user: readEnv('DB_USER') || (isProduction ? '' : 'root'),
+    password: readEnv('DB_PASSWORD') || '',
+    database: readEnv('DB_NAME') || (isProduction ? '' : 'ivaworks'),
   },
 
   jwt: {
