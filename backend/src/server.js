@@ -7,18 +7,18 @@ const env = require('./config/env');
 const { testConnection } = require('./config/db');
 
 async function start() {
+  app.listen(env.port, '0.0.0.0', () => {
+    console.log(`✓ IVAWORKS API running on port ${env.port}`);
+    console.log(`  Environment: ${env.nodeEnv}`);
+    console.log(`  Health:      /api/health`);
+  });
+
   try {
     await testConnection();
     console.log('✓ Database connected');
-
-    app.listen(env.port, () => {
-      console.log(`✓ IVAWORKS API running on http://localhost:${env.port}`);
-      console.log(`  Environment: ${env.nodeEnv}`);
-      console.log(`  Health:      http://localhost:${env.port}/api/health`);
-    });
   } catch (error) {
-    console.error('✗ Failed to start server:', error.message);
-    process.exit(1);
+    console.error('✗ Database connection failed:', error.message);
+    console.error('  Check DB_HOST, DB_USER, DB_NAME, DB_PASSWORD in Hostinger env vars');
   }
 }
 

@@ -10,7 +10,7 @@ require('dotenv').config({
 
 const env = {
   nodeEnv: process.env.NODE_ENV || 'development',
-  port: parseInt(process.env.PORT, 10) || 5000,
+  port: parseInt(process.env.PORT, 10) || (process.env.NODE_ENV === 'production' ? 3000 : 5000),
 
   db: {
     host: process.env.DB_HOST || 'localhost',

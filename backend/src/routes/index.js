@@ -20,8 +20,18 @@ router.use('/applications', applicationRoutes);
 router.use('/contact-inquiries', contactRoutes);
 router.use('/public', publicRoutes);
 
-router.get('/health', (_req, res) => {
-  res.json({ success: true, message: 'IVAWORKS API is running' });
+router.get('/health', async (_req, res) => {
+  const { testConnection } = require('../config/db');
+  try {
+    await testConnection();
+    res.json({ success: true, message: 'IVAWORKS API is running', database: 'connected' });
+  } catch {
+    res.status(503).json({
+      success: false,
+      message: 'IVAWORKS API is running but database is unavailable',
+      database: 'disconnected',
+    });
+  }
 });
 
 module.exports = router;
