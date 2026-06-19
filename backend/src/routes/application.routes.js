@@ -10,6 +10,6 @@ router.use(authenticate);
 router.get('/', asyncHandler(ApplicationController.list));
 router.get('/:id', asyncHandler(ApplicationController.getById));
 router.patch('/:id/status', asyncHandler(ApplicationController.updateStatus));
-router.delete('/:id', asyncHandler(ApplicationController.delete));
+router.delete('/:id', asyncHandler(ApplicationController.remove));
 
 module.exports = router;
