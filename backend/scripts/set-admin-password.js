@@ -2,10 +2,13 @@
  * Create or reset the admin account in MySQL (no default password in repo).
  * Usage: node scripts/set-admin-password.js "YourSecurePassword"
  * Optional: node scripts/set-admin-password.js "YourSecurePassword" admin admin@yourdomain.com
+ *
+ * On Hostinger SSH (env vars from panel are not in the shell — pass DB_* inline or export first):
+ *   DB_HOST=127.0.0.1 DB_USER=... DB_NAME=... DB_PASSWORD=... node backend/scripts/set-admin-password.js "YourSecurePassword"
  */
-require('dotenv').config();
 const bcrypt = require('bcrypt');
 const mysql = require('mysql2/promise');
+const env = require('../src/config/env');
 
 const password = process.argv[2];
 const username = process.argv[3] || 'admin';
@@ -19,11 +22,11 @@ if (!password || password.length < 8) {
 
 async function main() {
   const connection = await mysql.createConnection({
-    host: process.env.DB_HOST || 'localhost',
-    port: parseInt(process.env.DB_PORT, 10) || 3306,
-    user: process.env.DB_USER || 'root',
-    password: process.env.DB_PASSWORD || '',
-    database: process.env.DB_NAME || 'ivaworks',
+    host: env.db.host,
+    port: env.db.port,
+    user: env.db.user,
+    password: env.db.password,
+    database: env.db.database,
   });
 
   const hash = await bcrypt.hash(password, 12);
