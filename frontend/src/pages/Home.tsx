@@ -45,7 +45,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-none text-slate-950">
                 IVA Work Solutions <br />
                 <span className="bg-gradient-to-r from-[#5EE3B7] to-[#00BFEF] bg-clip-text text-transparent">
-                  Consulting·Staffing·Technology
+                  Consulting · Staffing · Technology
                 </span>
               </h1>
               <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-2xl">
@@ -67,15 +67,15 @@ export default function Home({ setCurrentPage }: HomeProps) {
               </div>
               <div className="pt-8 border-t border-slate-100 grid grid-cols-3 gap-6">
                 <div>
-                  <span className="block text-3xl font-extrabold bg-gradient-to-r from-[#5EE3B7] to-[#00BFEF] bg-clip-text text-transparent">5000+</span>
+                  <span className="block text-3xl font-extrabold bg-gradient-to-r from-[#5EE3B7] to-[#00BFEF] bg-clip-text text-transparent">5+</span>
                   <span className="text-xs text-slate-500 uppercase tracking-wider font-semibold">Workers Deployed</span>
                 </div>
                 <div>
-                  <span className="block text-3xl font-extrabold bg-gradient-to-r from-[#5EE3B7] to-[#00BFEF] bg-clip-text text-transparent">200+</span>
+                  <span className="block text-3xl font-extrabold bg-gradient-to-r from-[#5EE3B7] to-[#00BFEF] bg-clip-text text-transparent">1</span>
                   <span className="text-xs text-slate-500 uppercase tracking-wider font-semibold">Active Clients</span>
                 </div>
                 <div>
-                  <span className="block text-3xl font-extrabold bg-gradient-to-r from-[#5EE3B7] to-[#00BFEF] bg-clip-text text-transparent">10+</span>
+                  <span className="block text-3xl font-extrabold bg-gradient-to-r from-[#5EE3B7] to-[#00BFEF] bg-clip-text text-transparent">1</span>
                   <span className="text-xs text-slate-500 uppercase tracking-wider font-semibold">Industries Served</span>
                 </div>
               </div>
