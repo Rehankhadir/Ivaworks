@@ -40,11 +40,11 @@ export default function AdminLogin({ onLoginSuccess }: AdminLoginProps) {
 
       <div className="relative z-10 mx-auto flex max-w-md flex-col items-center justify-center px-4 sm:px-6">
         <div className="mb-8 text-center">
-          <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-tr from-[#5EE3B7] to-[#00BFEF] p-[2px] shadow-2xl shadow-[#00BFEF]/30 mb-4">
+          {/* <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-tr from-[#5EE3B7] to-[#00BFEF] p-[2px] shadow-2xl shadow-[#00BFEF]/30 mb-4">
             <div className="flex h-full w-full items-center justify-center rounded-[14px] bg-white">
               <ShieldCheck className="h-7 w-7 text-[#00BFEF]" />
             </div>
-          </div>
+          </div> */}
           <span className="inline-block rounded-full border border-[#00BFEF]/20 bg-[#00BFEF]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[#00BFEF]">
             Restricted Access
           </span>
