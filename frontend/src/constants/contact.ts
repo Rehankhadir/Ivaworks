@@ -1,0 +1,3 @@
+export const ADVISOR_PHONE_DISPLAY = '+91 70755 50125';
+export const ADVISOR_PHONE_TEL = '+917075550125';
+export const ADVISOR_WHATSAPP_URL = 'https://wa.me/917075550125';

@@ -1,4 +1,5 @@
 import { Page } from '../types';
+import { ADVISOR_PHONE_DISPLAY, ADVISOR_PHONE_TEL } from '../constants/contact';
 import { Mail, Phone, MapPin } from 'lucide-react';
 import logo from '../assets/logo.png';
 
@@ -83,7 +84,7 @@ export default function Footer({ setCurrentPage }: FooterProps) {
               </li>
               <li className="flex items-center space-x-3">
                 <Phone className="h-4 w-4 text-[#00BFEF] shrink-0" />
-                <a href="tel:+917075550125" className="hover:text-white transition-colors">+91 70755 50125</a>
+                <a href={`tel:${ADVISOR_PHONE_TEL}`} className="hover:text-white transition-colors">{ADVISOR_PHONE_DISPLAY}</a>
               </li>
               <li className="flex items-center space-x-3">
                 <Mail className="h-4 w-4 text-[#5EE3B7] shrink-0" />

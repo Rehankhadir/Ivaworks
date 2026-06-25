@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import CookieConsent from '../components/CookieConsent';
 import type { Page } from '../types';
+import { ADVISOR_PHONE_TEL, ADVISOR_WHATSAPP_URL } from '../constants/contact';
 import { ArrowUp, Sparkles, X, ChevronRight } from 'lucide-react';
 
 const WhatsAppIcon = ({ className }: { className?: string }) => (
@@ -83,7 +84,7 @@ export default function PublicLayout({
 
       <div className="fixed bottom-6 right-6 z-40 flex flex-col space-y-3 items-end">
         <a
-          href="https://wa.me/917075550125"
+          href={ADVISOR_WHATSAPP_URL}
           target="_blank"
           rel="noreferrer"
           className="h-12 w-12 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-105"
@@ -105,7 +106,7 @@ export default function PublicLayout({
 
       <div className="sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-gray-100 p-3 grid grid-cols-2 gap-3 shadow-2xl">
         <a
-          href="tel:+1234567890"
+          href={`tel:${ADVISOR_PHONE_TEL}`}
           className="bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold py-3 px-4 rounded-xl text-xs text-center block"
         >
           Call Advisor

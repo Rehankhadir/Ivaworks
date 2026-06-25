@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown, ChevronRight, Briefcase, Cpu, Layers } from 'lucide-react';
 import { Page } from '../types';
+import { ADVISOR_PHONE_TEL } from '../constants/contact';
 import logo from '../assets/logo.png';
 
 interface NavbarProps {
@@ -249,7 +250,7 @@ export default function Navbar({ currentPage, setCurrentPage, onNavigateToServic
             {/* Mobile Navigation Toggle */}
             <div className="flex lg:hidden items-center space-x-3">
               <a
-                href="tel:+1234567890"
+                href={`tel:${ADVISOR_PHONE_TEL}`}
                 className="text-xs font-bold text-slate-800 bg-slate-100 px-3 py-1.5 rounded-full"
               >
                 Call

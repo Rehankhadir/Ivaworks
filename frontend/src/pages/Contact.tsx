@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react';
 import { submitContactInquiry } from '../services/public.api';
+import { ADVISOR_PHONE_DISPLAY, ADVISOR_PHONE_TEL, ADVISOR_WHATSAPP_URL } from '../constants/contact';
 import {
   Mail,
   Phone,
@@ -126,7 +127,7 @@ export default function Contact() {
             <div className="space-y-4">
               {[
                 { icon: <MapPin className="h-5 w-5 text-[#5EE3B7]" />, title: 'Corporate Headquarters', content: <>WorkFlo Hitex Bizness Square, 4th Floor<br />Opp. Hitex Road, Hitech City<br />Hyderabad, Telangana - 500081</> },
-                { icon: <Phone className="h-5 w-5 text-[#00BFEF]" />, title: 'Direct Support Phone', content: <><a href="tel:+917075550125" className="font-semibold text-slate-700 hover:text-slate-950">+91 70755 50125</a><br />Available Mon-Fri, 9:00 AM - 6:00 PM EST</> },
+                { icon: <Phone className="h-5 w-5 text-[#00BFEF]" />, title: 'Direct Support Phone', content: <><a href={`tel:${ADVISOR_PHONE_TEL}`} className="font-semibold text-slate-700 hover:text-slate-950">{ADVISOR_PHONE_DISPLAY}</a><br />Available Mon-Fri, 9:00 AM - 6:00 PM EST</> },
                 { icon: <Mail className="h-5 w-5 text-[#5EE3B7]" />, title: 'Direct Coordinator Email', content: <><a href="mailto:info@ivaworksolutions.com" className="font-semibold text-slate-700 hover:text-slate-950">info@ivaworksolutions.com</a><br />Inquiries reviewed within 1 business day</> }
               ].map((item) => (
                 <div key={item.title} className="flex items-start space-x-4 rounded-2xl border border-slate-100 bg-white p-5 shadow-sm transition-all hover:border-[#5EE3B7]/30 hover:shadow-md">
@@ -148,7 +149,7 @@ export default function Contact() {
             </div>
 
             <div className="border-t border-slate-100 pt-6">
-              <a href="https://wa.me/917075550125" target="_blank" rel="noreferrer" className="inline-flex items-center space-x-3 rounded-xl border border-emerald-200 bg-white px-6 py-4 text-sm font-extrabold text-emerald-600 shadow-sm transition-all hover:border-emerald-300 hover:bg-emerald-50 hover:shadow-md">
+              <a href={ADVISOR_WHATSAPP_URL} target="_blank" rel="noreferrer" className="inline-flex items-center space-x-3 rounded-xl border border-emerald-200 bg-white px-6 py-4 text-sm font-extrabold text-emerald-600 shadow-sm transition-all hover:border-emerald-300 hover:bg-emerald-50 hover:shadow-md">
                 <MessageSquare className="h-5 w-5" />
                 <span>Chat via WhatsApp Live</span>
               </a>
