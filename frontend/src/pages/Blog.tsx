@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useBlogs } from '../hooks/useDataStore';
 import { BlogPost } from '../types';
+import { prepareBlogHtml } from '../utils/blogContent';
 import { Calendar, User, Clock, ChevronLeft, ArrowRight } from 'lucide-react';
 
 export default function Blog() {
@@ -98,7 +99,7 @@ export default function Blog() {
             {/* Body — content is HTML from admin Quill editor */}
             <div
               className="blog-content text-sm sm:text-base leading-relaxed text-slate-700"
-              dangerouslySetInnerHTML={{ __html: selectedPost.content }}
+              dangerouslySetInnerHTML={{ __html: prepareBlogHtml(selectedPost.content) }}
             />
 
             {/* Author Footer */}

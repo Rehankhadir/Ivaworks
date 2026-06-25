@@ -87,7 +87,14 @@
 .blog-content h3 { font-size: 1.25rem; }
 
 .blog-content p {
-  margin-bottom: 1rem;
+  margin: 0 0 0.65rem;
+}
+
+/* Quill blank line — one line of space, not a full paragraph gap */
+.blog-content p.blog-empty-line {
+  margin: 0.15rem 0;
+  line-height: 1.1;
+  padding: 0;
 }
 
 .blog-content strong {
