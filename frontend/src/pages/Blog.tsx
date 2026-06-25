@@ -98,7 +98,7 @@ export default function Blog() {
 
             {/* Body — content is HTML from admin Quill editor */}
             <div
-              className="blog-content text-sm sm:text-base leading-relaxed text-slate-700"
+              className="blog-content text-sm sm:text-base text-slate-700"
               dangerouslySetInnerHTML={{ __html: prepareBlogHtml(selectedPost.content) }}
             />
 
