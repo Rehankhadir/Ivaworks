@@ -95,10 +95,11 @@ export default function Blog() {
               />
             </div>
 
-            {/* Body */}
-            <div className="prose prose-slate max-w-none text-sm sm:text-base leading-relaxed text-slate-700 whitespace-pre-line">
-              {selectedPost.content}
-            </div>
+            {/* Body — content is HTML from admin Quill editor */}
+            <div
+              className="blog-content text-sm sm:text-base leading-relaxed text-slate-700"
+              dangerouslySetInnerHTML={{ __html: selectedPost.content }}
+            />
 
             {/* Author Footer */}
             <div className="bg-slate-50 border border-slate-100 rounded-2xl p-6 sm:p-8 flex items-start space-x-4">
