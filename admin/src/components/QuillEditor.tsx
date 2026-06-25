@@ -11,6 +11,7 @@ interface Props {
 
 const TOOLBAR_OPTIONS = [
   [{ header: [1, 2, 3, false] }],
+  [{ align: [] }],
   ['bold', 'italic', 'underline', 'strike'],
   [{ list: 'ordered' }, { list: 'bullet' }],
   ['blockquote', 'code-block'],
