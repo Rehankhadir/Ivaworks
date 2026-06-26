@@ -1,6 +1,7 @@
 import { Page } from '../types';
-import { ADVISOR_PHONE_DISPLAY, ADVISOR_PHONE_TEL } from '../constants/contact';
+import { ADVISOR_PHONE_DISPLAY, ADVISOR_PHONE_TEL, SOCIAL_LINKS } from '../constants/contact';
 import { Mail, Phone, MapPin } from 'lucide-react';
+import { InstagramIcon, LinkedInIcon, XIcon } from './icons/SocialIcons';
 import logo from '../assets/logo.png';
 
 interface FooterProps {
@@ -23,7 +24,35 @@ export default function Footer({ setCurrentPage }: FooterProps) {
             <p className="text-sm text-slate-400 leading-relaxed">
               From expert consulting and strategic staffing to innovative technology solutions, IVA Work Solutions delivers everything your business needs under one roof. We simplify challenges, accelerate growth, and provide the right solutions to help you succeed in a fast-changing world.
             </p>
-           
+            <div className="flex items-center gap-3 pt-2">
+              <a
+                href={SOCIAL_LINKS.instagram}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Follow IVA Work Solutions on Instagram"
+                className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-800 bg-slate-900 text-slate-400 transition-colors hover:border-[#5EE3B7]/40 hover:bg-slate-800 hover:text-[#5EE3B7]"
+              >
+                <InstagramIcon className="h-4 w-4" />
+              </a>
+              <a
+                href={SOCIAL_LINKS.linkedin}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Follow IVA Work Solutions on LinkedIn"
+                className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-800 bg-slate-900 text-slate-400 transition-colors hover:border-[#00BFEF]/40 hover:bg-slate-800 hover:text-[#00BFEF]"
+              >
+                <LinkedInIcon className="h-4 w-4" />
+              </a>
+              <a
+                href={SOCIAL_LINKS.twitter}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Follow IVA Work Solutions on X (Twitter)"
+                className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-800 bg-slate-900 text-slate-400 transition-colors hover:border-white/30 hover:bg-slate-800 hover:text-white"
+              >
+                <XIcon className="h-4 w-4" />
+              </a>
+            </div>
           </div>
 
           {/* Quick Nav Links */}
