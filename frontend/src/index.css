@@ -139,3 +139,15 @@
 .blog-content .ql-ui {
   display: none;
 }
+
+.blog-content .ql-align-center {
+  text-align: center;
+}
+
+.blog-content .ql-align-right {
+  text-align: right;
+}
+
+.blog-content .ql-align-justify {
+  text-align: justify;
+}
